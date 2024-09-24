@@ -1,0 +1,4 @@
+1- poner algun tipo de sanitizacion de los datos como DOMPurify o express-validator
+2- borrar en cascade los datos de la db
+3- validar bien las contraseña en zod
+4- la ficha y la moto hacen todo junto
