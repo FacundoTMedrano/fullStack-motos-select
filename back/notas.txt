@@ -2,3 +2,4 @@
 2- borrar en cascade los datos de la db
 3- validar bien las contraseña en zod
 4- la ficha y la moto hacen todo junto
+5- crear un email en google para usar nodemailer y verificar que si se cree vien la verificacion

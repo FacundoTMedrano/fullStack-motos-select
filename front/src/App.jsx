@@ -10,6 +10,17 @@ import MotosPorMarca from "./pages/MotosPorMarca";
 import MotosPorCilindrada from "./pages/MotosPorCilindrada";
 import MotosPorEstilo from "./pages/MotosPorEstilo";
 import FichaTecnicaPage from "./pages/FichaTecnicaPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import VerificationEmail from "./pages/VerificationEmail";
+import NoAuthorized from "./pages/NoAuthorized";
+import AuthGate from "./pages/AuthGate";
+import RoleReq from "./pages/RoleReq";
+import User from "./pages/User";
+import Admin from "./pages/Admin";
+import MisDatos from "./pages/MisDatos";
+import ChangePassword from "./pages/ChangePassword";
+import Reviews from "./pages/Reviews";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -52,7 +63,33 @@ export default function App() {
                     element={<FichaTecnicaPage />}
                 />
             </Route>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="verificacion_email" element={<VerificationEmail />} />
+            <Route path="no_autorizado" element={<NoAuthorized />} />
             <Route path="*" element={<NotFound />} />
+
+            <Route element={<AuthGate />}>
+                <Route element={<RoleReq rolePermitido={"admin"} />}>
+                    <Route path="admin" element={<Admin />}>
+                        <Route index element={<MisDatos />} />
+                        <Route
+                            path="change_password"
+                            element={<ChangePassword />}
+                        />
+                    </Route>
+                </Route>
+                <Route element={<RoleReq rolePermitido={"user"} />}>
+                    <Route path="user" element={<User />}>
+                        <Route index element={<MisDatos />} />
+                        <Route
+                            path="change_password"
+                            element={<ChangePassword />}
+                        />
+                        <Route path="reviews" element={<Reviews />} />
+                    </Route>
+                </Route>
+            </Route>
         </Routes>
     );
 }

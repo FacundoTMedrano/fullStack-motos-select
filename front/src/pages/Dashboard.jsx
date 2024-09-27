@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import useContexto from "../hooks/useContexto";
 import useDatos from "../hooks/useDatos";
+import LogoutButon from "../components/LogoutButon";
 
 export default function Dashboard() {
     const {
@@ -95,6 +96,7 @@ export default function Dashboard() {
                     })}
                 </select>
             </nav>
+            <LogoutButon />
             <Outlet />
         </div>
     );

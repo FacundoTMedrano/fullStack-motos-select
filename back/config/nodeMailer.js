@@ -1,9 +1,12 @@
 // los datos de la cuenta se generan automaticamente en https://ethereal.email/create, son cuentas random
+import dotenv from "dotenv";
+dotenv.config();
 export default {
-    host: "smtp.ethereal.email",
-    port: 587,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-        user: "samson.bergnaum@ethereal.email",
-        pass: "8KqHnF6FMCRD9v1eR1",
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPASSWORD,
     },
 };

@@ -23,9 +23,11 @@ export class ReviewController {
     }
 
     async createReview(req, res) {
-        req.body.user = req.id;
-        req.body.state = "pending";
-        const validacion = validateReview(req.body);
+        const dato = req.body;
+        dato.user = req.id;
+        // dato.state = "pending";
+        dato.state = "approved"; //cambiar esto
+        const validacion = validateReview(dato);
         if (!validacion.success) {
             throw new CustomErrors.BadRequestError("provide values");
         }

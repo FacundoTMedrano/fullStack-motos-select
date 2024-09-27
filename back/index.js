@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import "express-async-errors";
 dotenv.config();
+import "express-async-errors";
 import mongoose from "mongoose";
 
 import express from "express";
@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
 import { corsOptions } from "./config/corsConfig.js";
-// eslint-disable-next-line no-unused-vars
+
 import { verifyJWT } from "./middlewares/verifyJWT.js";
 
 import marcasRouter from "./routes/marcaRouter.js";

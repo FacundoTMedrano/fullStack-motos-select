@@ -42,22 +42,23 @@ export class AuthController {
 
         const password = await bcrypt.hash(user.data.password, 10);
 
-        const newUser = await User.create({
+        console.log("origin--->", req.headers?.origin);
+
+        //checkear el origen de donde se envia el email
+
+        await sendVerificationEmail({
+            origin: process.env.ORIGIN,
+            name: user.data.name,
+            email: user.data.email,
+            verificationToken,
+        });
+
+        await User.create({
             name: user.data.name,
             email: user.data.email,
             password,
             role,
             verificationToken: verificationTokenHash,
-        });
-
-        console.log("origin--->", req.headers?.origin);
-
-        //checkear el origen de donde se envia el email
-        await sendVerificationEmail({
-            origin: process.env.ORIGIN,
-            name: newUser.name,
-            email: newUser.email,
-            verificationToken,
         });
 
         return res.status(StatusCodes.CREATED).json({
@@ -77,7 +78,7 @@ export class AuthController {
             throw new CustomErrors.BadRequestError("bad data");
         }
         const user = await User.findOne({
-            email: validacion.data?.email,
+            email: validacion.data.email,
         });
         if (!user) {
             throw new CustomErrors.UnauthenticatedError("Verification Failed");
@@ -128,7 +129,9 @@ export class AuthController {
 
         const jwt = req?.cookies?.jwt;
         if (jwt) {
-            res.clearCookie("jwt", cookie);
+            // eslint-disable-next-line no-unused-vars
+            const { maxAge, ...restoDeLaCookie } = cookie; //al parecer se debe pasar sin maxage
+            res.clearCookie("jwt", restoDeLaCookie);
         }
 
         const accessToken = makeAccess({
@@ -143,13 +146,16 @@ export class AuthController {
             accessToken,
             name: user.name,
             email: user.email,
+            id: user._id,
         });
     }
 
     async logOut(req, res) {
         const jwt = req?.cookies?.jwt;
         if (jwt) {
-            res.clearCookie("jwt", cookie);
+            // eslint-disable-next-line no-unused-vars
+            const { maxAge, ...restoDeLaCookie } = cookie; //al parecer se debe pasar sin maxage
+            res.clearCookie("jwt", restoDeLaCookie);
         }
 
         return res.status(StatusCodes.NO_CONTENT).send();
@@ -162,7 +168,10 @@ export class AuthController {
                 "no autorizado en el refresh",
             );
         }
-        res.clearCookie("jwt", cookie);
+
+        // eslint-disable-next-line no-unused-vars
+        const { maxAge, ...restoDeLaCookie } = cookie; //al parecer se debe pasar sin maxage
+        res.clearCookie("jwt", restoDeLaCookie);
 
         const decode = await verifyReturnData(
             refreshToken,
@@ -193,6 +202,7 @@ export class AuthController {
             accessToken,
             name: user.name,
             email: user.email,
+            id: user._id,
         });
     }
 
@@ -292,7 +302,7 @@ export class AuthController {
                 newPassword: z.string().min(5).max(20),
                 repetNewPassword: z.string().min(5).max(20),
             })
-            .refine((data) => data.oldPassword !== newPassword, {
+            .refine((data) => data.oldPassword !== data.newPassword, {
                 path: ["newPassword"],
             })
             .refine((data) => data.newPassword === data.repetNewPassword, {

@@ -10,6 +10,7 @@ export default function AuthProvider({ children }) {
         accessToken: null,
         name: null,
         email: null,
+        id: null,
     });
 
     return (

@@ -24,6 +24,6 @@ export default function errorHandlerMiddleware(err, req, res, next) {
         customError.msg = err.message || "error en la imagen";
         customError.statusCode = 400;
     }
-
+    console.log(err);
     return res.status(customError.statusCode).json({ msg: customError.msg });
 }

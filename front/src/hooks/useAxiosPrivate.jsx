@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import useRefresh from "./useRefresh";
 import useAuth from "./useAuth";
 
-const useAxiosPrivate = () => {
+export default function useAxiosPrivate() {
     const refresh = useRefresh();
     const { auth } = useAuth();
 
@@ -32,7 +32,7 @@ const useAxiosPrivate = () => {
                     ] = `Bearer ${newAccessToken}`;
                     return axiosPrivate(prevRequest);
                 }
-                console.log(error.config,"ssss")
+                console.log(error.config, "ssss");
                 return Promise.reject(error);
             }
         );
@@ -44,6 +44,4 @@ const useAxiosPrivate = () => {
     }, [auth, refresh]);
 
     return axiosPrivate;
-};
-
-export default useAxiosPrivate;
+}
