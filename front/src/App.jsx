@@ -21,6 +21,12 @@ import Admin from "./pages/Admin";
 import MisDatos from "./pages/MisDatos";
 import ChangePassword from "./pages/ChangePassword";
 import Reviews from "./pages/Reviews";
+import EditarReview from "./pages/EditReview";
+import Cilindradas from "./pages/Cilindradas";
+import Tipos from "./pages/Tipos";
+import MarcasCrud from "./pages/MarcasCrud";
+import Motos from "./pages/Motos";
+import CrearMoto from "./pages/CrearMoto";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -77,6 +83,15 @@ export default function App() {
                             path="change_password"
                             element={<ChangePassword />}
                         />
+                        <Route path="reviews" element={<Reviews />} />
+                        <Route path="reviews/:id" element={<EditarReview />} />
+                        <Route path="cilindradas" element={<Cilindradas />} />
+                        <Route path="tipos" element={<Tipos />} />
+                        <Route path="marcas" element={<MarcasCrud />} />
+                        <Route path="motos">
+                            <Route index element={<Motos />} />
+                            <Route path="crear" element={<CrearMoto />} />
+                        </Route>
                     </Route>
                 </Route>
                 <Route element={<RoleReq rolePermitido={"user"} />}>
@@ -87,6 +102,7 @@ export default function App() {
                             element={<ChangePassword />}
                         />
                         <Route path="reviews" element={<Reviews />} />
+                        <Route path="reviews/:id" element={<EditarReview />} />
                     </Route>
                 </Route>
             </Route>

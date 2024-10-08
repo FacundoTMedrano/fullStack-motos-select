@@ -6,8 +6,6 @@ import { useEffect } from "react";
 import useContexto from "../hooks/useContexto";
 
 export default function Marcas() {
-    // ya la tiene por que la descargo al inicio en useDatos()
-    // "sads"
     const { data: marcas } = useQuery({
         queryKey: ["marcas"],
         queryFn: async () => {
@@ -32,7 +30,7 @@ export default function Marcas() {
 
     useEffect(() => {
         setListaOpcionesMotos(motos);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <div>

@@ -1,7 +1,7 @@
-import z from "zod";
+import { z } from "zod";
 
 const mecanicaSchema = z.object({
-    Motor: z.string(),
+    Motor: z.string().min(1),
     Cilindrada: z.string(),
     "Potencia máxima": z.string(),
     "Velocidad máxima": z.string(),
@@ -13,7 +13,6 @@ const mecanicaSchema = z.object({
 });
 
 const configuracionSchema = z.object({
-    Colores: z.array(z.string()),
     "Faro Delantero": z.string(),
     Llantas: z.string(),
     "Frenos D / T": z.string(),
@@ -29,40 +28,17 @@ const configuracionSchema = z.object({
     "Consumo y Autonomía": z.string(),
     "Puerto USB": z.string(),
     "Altura del Asiento": z.string(),
-    Equipamiento: z.string(),
+    Equipamiento: z.array(z.string()),
     "Tipo de Batería": z.string(),
     "Cantidad de Baterías": z.string(),
     "Tiempo de Carga": z.string(),
 });
 
-const garantiaSchema = z.object({
-    Cobertura: z.string(),
-    Origen: z.string(),
-});
-
-export const FichaTecnicaSchema = z.object({
-    mecanica: mecanicaSchema.partial().optional(),
-    configuracion: configuracionSchema.partial().optional(),
-    garantia: garantiaSchema.partial().optional(),
-    imagenes: z.array(z.string()).min(1),
-});
-
-export const fichaUpdatechema = z.object({
-    _id: z.string(),
-    mecanica: mecanicaSchema.partial().optional(),
-    configuracion: configuracionSchema.partial().optional(),
-    garantia: garantiaSchema.partial().optional(),
-    imagenes: z.array(z.string()).min(1),
-});
-
-export function validateUpdate(input) {
-    return fichaUpdatechema.safeParse(input);
-}
-
-export function validateCreate(input) {
-    return FichaTecnicaSchema.safeParse(input);
-}
-
-export function safeValidateFichaTecnica(input) {
-    return FichaTecnicaSchema.safeParse(input);
+export default function fichaMecanConfigValidate(input) {
+    return z
+        .object({
+            mecanica: mecanicaSchema.partial(),
+            configuracion: configuracionSchema.partial(),
+        })
+        .safeParse(input);
 }

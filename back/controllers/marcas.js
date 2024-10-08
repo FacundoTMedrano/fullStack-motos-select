@@ -32,7 +32,7 @@ export class MarcaController {
                 marca: z.string().min(1),
             })
             .safeParse(req.body);
-
+        console.log(req.file, req.body);
         if (!validacion.success || !req.file) {
             throw new CustomErrors.BadRequestError("bad data");
         }

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import zodSchema from "../schemas/reviewForm.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import reviewFormDefaultVal from "../constants/reviewFormDefaultVal.js";
@@ -22,6 +22,21 @@ export default function ReviewForm({ moto }) {
         resolver: zodResolver(zodSchema),
     });
 
+    const miReview = useQuery({
+        queryKey: ["reviews", "mi_review", moto._id],
+        queryFn: async () => {
+            const { data } = await axiosPrivate(
+                `reviews/review-from-moto/${moto._id}`
+            );
+            console.log(data);
+            return data;
+        },
+        retry: 0,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        staleTime: Infinity,
+    });
+
     const enviarForm = useMutation({
         mutationFn: async (datos) => {
             const { data } = await axiosPrivate.post("reviews/create", {
@@ -33,11 +48,20 @@ export default function ReviewForm({ moto }) {
         onError: (error) => {
             console.log(error.message);
         },
-        onSettled: () => {
+        onSuccess: () => {
             //cambiar esto a que no invalide, por que tiene que ser aceptado por el admin primero
-            queryClient.invalidateQueries({ queryKey: ["reviews", moto._id] });
+            queryClient.invalidateQueries({
+                queryKey: ["reviews", "mi_review", moto._id],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["reviews"],
+            });
         },
     });
+
+    if (miReview.isSuccess) {
+        return <div>ya tiene un review</div>;
+    }
 
     return (
         <form

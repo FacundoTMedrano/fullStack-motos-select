@@ -21,6 +21,7 @@ export default function Reviews({ moto }) {
         refetchOnMount: false,
         staleTime: Infinity,
     });
+
     if (isLoading) {
         return <div>Cargando</div>;
     }
@@ -38,6 +39,7 @@ export default function Reviews({ moto }) {
             </div>
         );
     } else {
+        //modificar luego para que si ya tiene un dato llenado le diga que ya tiene review
         formulario = <ReviewForm moto={moto} />;
     }
 

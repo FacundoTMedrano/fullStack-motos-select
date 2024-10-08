@@ -3,11 +3,12 @@ import CustomErrors from "../errors/index.js";
 import Review from "../models/mongoose/Review.js";
 import Moto from "../models/mongoose/Moto.js";
 import { validateReview } from "../schemas/zod/review.js";
+import * as z from "zod";
 
 export class ReviewController {
     async getAll(req, res) {
         const reviews = await Review.find();
-        return res.status(StatusCodes.OK).json({ reviews });
+        return res.status(StatusCodes.OK).json(reviews);
     }
 
     async getAllbyMoto(req, res) {
@@ -25,8 +26,8 @@ export class ReviewController {
     async createReview(req, res) {
         const dato = req.body;
         dato.user = req.id;
-        // dato.state = "pending";
-        dato.state = "approved"; //cambiar esto
+        dato.state = "pending";
+        // dato.state = "approved"; //testeo
         const validacion = validateReview(dato);
         if (!validacion.success) {
             throw new CustomErrors.BadRequestError("provide values");
@@ -80,7 +81,7 @@ export class ReviewController {
         }
         const review = await Review.findOne({
             user: req.id,
-            _id: req.params.id,
+            _id: req.params.id, //id del review
         });
         if (!review) {
             throw new CustomErrors.NotFoundError("id not found");
@@ -141,11 +142,31 @@ export class ReviewController {
         if (!req.params?.id) {
             throw new CustomErrors.BadRequestError("provide values");
         }
+
         req.body.user = req.id;
         req.body.state = "pending";
-        const validacion = validateReview(req.body);
+        const validacion = z
+            .object({
+                motor: z.number(),
+                velocidadMaxima: z.number(),
+                armadoYTerminaciones: z.number(),
+                equipamientoEInstrumental: z.number(),
+                bateriasYRecarga: z.number(),
+                consumoYAutonimia: z.number(),
+                neumaticos: z.number(),
+                frenos: z.number(),
+                luces: z.number(),
+                costoDeMantenimiento: z.number(),
+                opinionPositiva: z.string(),
+                opinionNegativa: z.string().optional(),
+            })
+            .safeParse(req.body);
 
         if (!validacion.success) {
+            validacion.error.errors.forEach((err) => {
+                console.log(`Error en ${err.path[0]}: ${err.message}`);
+            });
+
             throw new CustomErrors.BadRequestError("provide values");
         }
         const review = await Review.findOneAndUpdate(
@@ -156,6 +177,20 @@ export class ReviewController {
         if (!review) {
             throw new CustomErrors.NotFoundError("id not found");
         }
-        return res.status(StatusCodes.OK).json({ review });
+        return res.status(StatusCodes.OK).json(review);
+    }
+
+    async getReviewFromMoto(req, res) {
+        if (!req.params.id) {
+            throw new CustomErrors.BadRequestError("provide values");
+        }
+        const review = await Review.findOne({
+            moto: req.params.id,
+            user: req.id,
+        });
+        if (!review) {
+            throw new CustomErrors.NotFoundError("id not found");
+        }
+        return res.status(StatusCodes.OK).json(review);
     }
 }

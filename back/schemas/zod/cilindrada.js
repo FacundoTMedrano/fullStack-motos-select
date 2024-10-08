@@ -6,9 +6,7 @@ export const cilindradaSchema = z
         max: z.number().min(0),
         min: z.number().min(0),
     })
-    .refine((data) => data.max > data.min, {
-        message: "maxima debe ser mayor que minima",
-    });
+    .refine((data) => data.max > data.min);
 
 export function Validatesafe(input) {
     return cilindradaSchema.safeParse(input);

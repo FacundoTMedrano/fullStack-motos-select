@@ -8,6 +8,7 @@ import z from "zod";
 import sharp from "sharp";
 import fs from "node:fs/promises";
 import Review from "../models/mongoose/Review.js";
+import fichaMecanConfigValidate from "../schemas/zod/fichaTecnica.js";
 
 export class MotoController {
     async getAll(req, res) {
@@ -54,8 +55,8 @@ export class MotoController {
                 cilindrada: z.number().min(0).optional(),
             })
             .safeParse(req.body.moto);
-
-        if (!moto.success) {
+        const ficha = fichaMecanConfigValidate(req.body.ficha);
+        if (!moto.success || !ficha.success) {
             throw new CustomErrors.BadRequestError("bad data moto");
         }
 
@@ -71,8 +72,8 @@ export class MotoController {
         moto.data.img = nombreNuevo;
         const nuevaMoto = await Moto.create(moto.data);
 
-        const ficha = { informacion: req.body.ficha.informacion }; //solo deberia tener {informacion}
-        ficha.moto = nuevaMoto._id;
+        // const ficha = { informacion: req.body.ficha.informacion }; //solo deberia tener {informacion}
+        ficha.data.moto = nuevaMoto._id;
         const imagenes = [];
         for (let i = 0; i < fichaImgs.length; i++) {
             const nombreNuevo = `${nanoid(10)}${path.extname(fichaImgs[i].originalname)}`;
@@ -85,9 +86,9 @@ export class MotoController {
                 .toFile(`imgs/medium/${nombreNuevo}`);
             imagenes.push(nombreNuevo);
         }
-        ficha.imagenes = imagenes;
+        ficha.data.imagenes = imagenes;
 
-        const newFicha = await FichaTecnica.create(ficha);
+        const newFicha = await FichaTecnica.create(ficha.data);
 
         return res
             .status(StatusCodes.CREATED)
@@ -141,8 +142,9 @@ export class MotoController {
                 cilindrada: z.number().min(0).optional(),
             })
             .safeParse(req.body.moto);
+        const ficha = fichaMecanConfigValidate(req.body.ficha);
 
-        if (!moto.success) {
+        if (!moto.success || !ficha.success) {
             throw new CustomErrors.BadRequestError("bad data moto");
         }
         const motoDB = await Moto.findById(req.params.id);
@@ -150,8 +152,8 @@ export class MotoController {
             throw new CustomErrors.NotFoundError("id not found");
         }
 
-        const ficha = await FichaTecnica.findOne({ moto: motoDB._id });
-        if (!ficha) {
+        const fichaDB = await FichaTecnica.findOne({ moto: motoDB._id });
+        if (!fichaDB) {
             throw new CustomErrors.NotFoundError("id ficha not found");
         }
 
@@ -194,7 +196,7 @@ export class MotoController {
 
                 imagenes.push(nombreNuevo);
             }
-            ficha.imagenes.push(...imagenes);
+            fichaDB.imagenes.push(...imagenes);
         }
 
         if (req.body.ficha.eliminar > 0) {
@@ -205,12 +207,14 @@ export class MotoController {
                     fs.unlink(`imgs/medium/${eliminar[i]}`),
                 ]);
             }
-            ficha.imagenes = ficha.imagenes.filter(
+            fichaDB.imagenes = fichaDB.imagenes.filter(
                 (v) => !eliminar.includes(v),
             );
         }
-        ficha.informacion = req.body.ficha.informacion;
-        await ficha.save();
+        for (let key in ficha.data) {
+            fichaDB[key] = ficha.data[key];
+        }
+        await fichaDB.save();
 
         return res.status(StatusCodes.OK).json({ msg: "success" });
     }
