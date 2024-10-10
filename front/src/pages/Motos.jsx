@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useState } from "react";
 import { base } from "../rutas";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Motos() {
     const axiosPrivate = useAxiosPrivate();
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const [selectMarca, setSelectMarca] = useState("");
 
@@ -15,9 +16,7 @@ export default function Motos() {
             const { data } = await axiosPrivate("marcas");
             return data;
         },
-        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity,
     });
 
     const motos = useQuery({
@@ -26,9 +25,20 @@ export default function Motos() {
             const { data } = await axiosPrivate("motos");
             return data;
         },
-        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity,
+    });
+
+    const eliminar = useMutation({
+        mutationFn: async (id) => {
+            await axiosPrivate.delete(`motos/${id}`);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["motos"] });
+            console.log("success");
+        },
     });
 
     if (marcas.isLoading || motos.isLoading) {
@@ -47,7 +57,7 @@ export default function Motos() {
 
     return (
         <div>
-            <button onClick={()=>navigate("crear")}>crear moto</button>
+            <button onClick={() => navigate("crear")}>crear moto</button>
             <select onChange={(e) => setSelectMarca(e.target.value)}>
                 <option value="">selecciona una marca</option>
                 {marcas.data.map((v) => {
@@ -58,6 +68,7 @@ export default function Motos() {
                     );
                 })}
             </select>
+            {selectMarca === "" && <p>no hay marca seleccionada</p>}
             {motosFiltradas.map((v) => {
                 const imgBig = `${base}/imgs/big/${v.img}`;
                 const imgMedium = `${base}/imgs/medium/${v.img}`;
@@ -65,10 +76,16 @@ export default function Motos() {
                     <div key={v._id}>
                         <img
                             src={imgBig}
-                            srcSet={`${imgBig} 500w,${imgMedium} 1000w`}
+                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
                             style={{ width: "250px" }}
                         />
                         <p>{v.nombre}</p>
+                        <button onClick={() => navigate(`editar/${v._id}`)}>
+                            editar
+                        </button>
+                        <button onClick={() => eliminar.mutate(v._id)}>
+                            delete
+                        </button>
                     </div>
                 );
             })}

@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const mecanicaSchema = z.object({
-    Motor: z.string(),
-    Cilindrada: z.string().min(1),
+    Motor: z.string().min(1, "campo requerido"),
+    Cilindrada: z.number({ message: "se requiere un numero" }).min(1),
     "Potencia máxima": z.string(),
     "Velocidad máxima": z.string(),
     Alimentación: z.string(),
@@ -28,17 +28,20 @@ const configuracionSchema = z.object({
     "Consumo y Autonomía": z.string(),
     "Puerto USB": z.string(),
     "Altura del Asiento": z.string(),
-    Equipamiento: z.array(z.string()),
+    Equipamiento: z.string(),
     "Tipo de Batería": z.string(),
     "Cantidad de Baterías": z.string(),
     "Tiempo de Carga": z.string(),
 });
 
-export default function fichaMecanConfigValidate(input) {
-    return z
-        .object({
-            mecanica: mecanicaSchema.partial(),
-            configuracion: configuracionSchema.partial(),
-        })
-        .safeParse(input);
-}
+const motoSchema = z.object({
+    nombre: z.string().min(1, "campo requerido"),
+    marca: z.string().min(1, "marca requerida"),
+    estilo: z.string().optional(),
+});
+
+export default z.object({
+    moto: motoSchema.partial(),
+    mecanica: mecanicaSchema.partial(),
+    configuracion: configuracionSchema.partial(),
+});

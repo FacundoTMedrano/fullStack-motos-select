@@ -11,7 +11,7 @@ const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 1024 * 1024 * 5 },
     fileFilter: function (req, file, cb) {
-        const filetypes = new RegExp(/jpeg|jpg|png|svg|webp/);
+        const filetypes = new RegExp(/jpeg|jpg|png|svg|webp|gif/);
         const mimetype = filetypes.test(file.mimetype); //esto podria se hackeado
         const extname = filetypes.test(file.originalname); //esto podria se hackeado
 
@@ -28,14 +28,16 @@ router.post(
     "/",
     verifyJWT,
     verifyRoles(["admin"]),
-    upload.fields({ name: "motoImg" }, { name: "fichaImgs" }),
+    // upload.single("motoImg"),
+    // upload.array("fichaImgs"),
+    upload.fields([{ name: "motoImg" }, { name: "fichaImgs" }]),
     moto.create,
 );
 router.patch(
     "/:id",
     verifyJWT,
     verifyRoles(["admin"]),
-    upload.fields({ name: "motoImg" }, { name: "fichaImgs" }),
+    upload.fields([{ name: "motoImg" }, { name: "fichaImgs" }]),
     moto.update,
 );
 router.delete("/:id", verifyJWT, verifyRoles(["admin"]), moto.delete);

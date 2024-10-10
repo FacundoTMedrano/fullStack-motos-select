@@ -32,8 +32,8 @@ import errorHandlerMiddleware from "./middlewares/error-handler.js";
 app.set("trust proxy", 1);
 
 app.use(morgan("tiny"));
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use("/imgs", express.static("imgs"));

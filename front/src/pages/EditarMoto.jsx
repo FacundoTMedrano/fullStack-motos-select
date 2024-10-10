@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import validarImagen from "../utils/validarImagen";
 import { nanoid } from "nanoid";
@@ -8,10 +9,18 @@ import fichaTec from "../schemas/fichaTecnica";
 import { zodResolver } from "@hookform/resolvers/zod";
 import keys from "../utils/keysFicha";
 import filterObj from "../utils/filterObj";
+import { base } from "../rutas";
+import { Fragment } from "react";
 
-export default function CrearMoto() {
+export default function EditarMoto() {
     const axiosPrivate = useAxiosPrivate();
+    const { id } = useParams();
     const queryClient = useQueryClient();
+    const botonImgRef = useRef(null);
+    const imagenesDeFichaRef = useRef(null);
+
+    const [eliminar, setEliminar] = useState([]);
+    const [viejasImagenes, setViejasImagenes] = useState([]);
 
     const [motoImg, setMotoImg] = useState({
         file: null,
@@ -19,8 +28,29 @@ export default function CrearMoto() {
     });
 
     const [fichasImg, setFichasImg] = useState({
-        files: [],
+        files: [], //{file:File-Img- , id:"23rewfc23(id)"}
         err: "",
+    });
+
+    const moto = useQuery({
+        queryKey: ["motos", id],
+        queryFn: async () => {
+            const { data } = await axiosPrivate(`motos/${id}`);
+            return data;
+        },
+        refetchOnWindowFocus: false,
+    });
+
+    const ficha = useQuery({
+        queryKey: ["ficha", moto?.data?.fichaTecnica],
+        queryFn: async () => {
+            const { data } = await axiosPrivate(
+                `fichas/${moto?.data?.fichaTecnica}`
+            );
+            return data;
+        },
+        enabled: moto.isSuccess,
+        refetchOnWindowFocus: false,
     });
 
     const marcas = useQuery({
@@ -29,9 +59,7 @@ export default function CrearMoto() {
             const { data } = await axiosPrivate("marcas");
             return data;
         },
-        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity,
     });
 
     const tipos = useQuery({
@@ -40,14 +68,12 @@ export default function CrearMoto() {
             const { data } = await axiosPrivate("estilos");
             return data;
         },
-        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity,
     });
 
-    const crear = useMutation({
+    const actualizar = useMutation({
         mutationFn: async (data) => {
-            await axiosPrivate.post("motos", data, {
+            await axiosPrivate.patch(`motos/${id}`, data, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
         },
@@ -56,7 +82,9 @@ export default function CrearMoto() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["motos"] });
-            queryClient.invalidateQueries({ queryKey: ["marcas"] });
+            queryClient.invalidateQueries({
+                queryKey: ["ficha", moto?.data?.fichaTecnica],
+            });
             console.log("realizado");
         },
     });
@@ -67,6 +95,18 @@ export default function CrearMoto() {
         register,
     } = useForm({
         resolver: zodResolver(fichaTec),
+        values: {
+            moto: { ...moto.data },
+            mecanica: {
+                ...ficha.data?.mecanica,
+                Cilindrada: ficha.data?.mecanica?.Cilindrada.replace(/\D/g, ""), //todo lo que no sea un numero por un espacio vacio
+            },
+            configuracion: {
+                ...ficha.data?.configuracion,
+                Equipamiento:
+                    ficha.data?.configuracion?.Equipamiento.join(" | "),
+            },
+        },
     });
 
     function cargarMotoImg(e) {
@@ -93,24 +133,35 @@ export default function CrearMoto() {
         const imagenes = files.map((v) => {
             return { file: v, id: nanoid() };
         });
-        setFichasImg({ files: imagenes, err: "" });
+        setFichasImg((prev) => {
+            return { files: [...prev.files, ...imagenes], err: "" };
+        });
     }
 
     function prepareSend(data) {
         if (motoImg.err || fichasImg.err) {
-            console.log(motoImg.err);
+            console.log(motoImg.err, fichasImg.err);
             return;
         }
-        if (!motoImg.file || fichasImg.files.length === 0) {
+        if (
+            //es decir si no quedan imagenes en la ficha
+            fichasImg.files.length === 0 &&
+            eliminar.length === ficha.data.imagenes.length
+        ) {
             console.log("error en los files");
             return;
         }
 
         const formData = new FormData();
-        formData.append("motoImg", motoImg.file);
-        fichasImg.files.forEach((v) => {
-            formData.append("fichaImgs", v.file);
-        });
+        if (motoImg.file) {
+            formData.append("motoImg", motoImg.file);
+        }
+        if (fichasImg.files.length) {
+            fichasImg.files.forEach((v) => {
+                formData.append("fichaImgs", v.file);
+            });
+        }
+        // const ficha = { eliminar };
 
         const moto = filterObj(data.moto);
         moto.cilindrada = data.mecanica.Cilindrada;
@@ -120,50 +171,140 @@ export default function CrearMoto() {
         const mecanica = filterObj(data.mecanica);
         const configuracion = filterObj(data.configuracion);
         if (configuracion.Equipamiento) {
-            configuracion.Equipamiento = configuracion.Equipamiento.split("|");
+            configuracion.Equipamiento = configuracion.Equipamiento.replace(
+                /\n/g,
+                ""
+            ).split("|");
         }
-        const datos = { moto, mecanica, configuracion };
-        console.log(datos);
-        formData.append("moto", JSON.stringify(datos.moto));
-        formData.append("mecanica", JSON.stringify(datos.mecanica));
-        formData.append("configuracion", JSON.stringify(datos.configuracion));
 
-        console.log("consola", formData);
-        crear.mutate(formData);
+        const datos = { moto, mecanica, configuracion, eliminar };
+
+        console.log(datos, formData);
+        formData.append("datos", JSON.stringify(datos));
+        // formData.append("moto", JSON.stringify(datos.moto));
+        // formData.append("mecanica", JSON.stringify(datos.mecanica));
+        // formData.append("configuracion", JSON.stringify(datos.configuracion));
+
+        // console.log("consola", formData);
+        actualizar.mutate(formData);
     }
 
-    if (marcas.isLoading || tipos.isLoading) {
-        return <p>cargando...</p>;
+    useEffect(() => {
+        if (ficha.isSuccess) {
+            setViejasImagenes(ficha.data.imagenes);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ficha.isSuccess]);
+
+    function handleImagenesViejas(img) {
+        setEliminar((prev) => [...prev, img]);
+        setViejasImagenes((prev) => {
+            return prev.filter((v) => v !== img);
+        });
     }
-    if (marcas.isError || tipos.isError) {
+
+    function handleFichasImg(id) {
+        setFichasImg((prev) => {
+            const nuevaLista = prev.files.filter((v) => v.id !== id);
+            return { ...prev, files: nuevaLista };
+        });
+    }
+
+    if (
+        moto.isLoading ||
+        ficha.isLoading ||
+        marcas.isLoading ||
+        tipos.isLoading
+    ) {
+        return <p>cargando</p>;
+    }
+    if (moto.isError || ficha.isError || marcas.isError || tipos.isError) {
         return <p>error</p>;
     }
-
     return (
         <div>
             <form onSubmit={handleSubmit(prepareSend)}>
-                {motoImg.file && (
+                {moto.data.img && !motoImg.file ? (
+                    <img
+                        src={`${base}/imgs/big/${moto.data.img}`}
+                        srcSet={`${base}/imgs/medium/${moto.data.img} 500w,${base}/imgs/big/${moto.data.img} 1000w`}
+                        style={{ width: "250px" }}
+                    />
+                ) : (
                     <img
                         src={URL.createObjectURL(motoImg.file)}
                         style={{ width: "250px" }}
                     />
                 )}
-                <input type="file" onChange={cargarMotoImg} />
+                <input
+                    ref={botonImgRef}
+                    style={{ display: "none" }}
+                    type="file"
+                    onChange={cargarMotoImg}
+                />
+                <button
+                    onClick={() => {
+                        botonImgRef.current.click();
+                    }}
+                    type="button"
+                >
+                    cambiar imagen de moto
+                </button>
                 {motoImg.err && <p>{motoImg.err}</p>}
 
                 <input type="text" {...register(keys.moto.nombre)} />
                 {errors.moto?.nombre && <p>{errors.moto.nombre.message}</p>}
 
-                {fichasImg.files.map((v) => {
-                    return (
-                        <img
-                            key={v.id}
-                            src={URL.createObjectURL(v.file)}
-                            style={{ width: "250px" }}
-                        />
-                    );
-                })}
-                <input type="file" multiple onChange={cargarFichaImgs} />
+                <div>
+                    {viejasImagenes.map((v) => {
+                        return (
+                            <Fragment key={v}>
+                                <img
+                                    src={`${base}/imgs/big/${v}`}
+                                    srcSet={`${base}/imgs/medium/${v} 500w,${base}/imgs/big/${v} 1000w`}
+                                    style={{ width: "250px" }}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => handleImagenesViejas(v)}
+                                >
+                                    borrar
+                                </button>
+                            </Fragment>
+                        );
+                    })}
+                    {fichasImg.files.map((v) => {
+                        return (
+                            <Fragment key={v.id}>
+                                <img
+                                    src={URL.createObjectURL(v.file)}
+                                    style={{ width: "250px" }}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => handleFichasImg(v.id)}
+                                >
+                                    borrar
+                                </button>
+                            </Fragment>
+                        );
+                    })}
+                </div>
+                <input
+                    ref={imagenesDeFichaRef}
+                    type="file"
+                    style={{ display: "none" }}
+                    multiple
+                    onChange={cargarFichaImgs}
+                />
+                <button
+                    type="button"
+                    onClick={() => {
+                        imagenesDeFichaRef.current.click();
+                    }}
+                >
+                    cargar imagenes ficha
+                </button>
                 {fichasImg.err && <p>{fichasImg.err}</p>}
 
                 <h2>marca</h2>

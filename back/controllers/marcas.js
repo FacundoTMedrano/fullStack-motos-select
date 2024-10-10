@@ -60,15 +60,19 @@ export class MarcaController {
         const moto = await Moto.find({ marca: marca._id });
         if (moto.length > 0) {
             for (let i = 0; i < moto.length; i++) {
-                const motoID = moto[i]._id;
-                await Review.deleteMany({ moto: motoID }); //borra todo los reviews
-                const ficha = await Ficha.findOneAndDelete({ moto: motoID }); //borra la ficha
+                await Review.deleteMany({ moto: moto[i]._id }); //borra todo los reviews
+
+                const ficha = await Ficha.findByIdAndDelete(
+                    moto[i].fichaTecnica,
+                ); //borra la ficha
+
                 for (let j = 0; j < ficha.imagenes.length; j++) {
                     await Promise.all([
-                        fs.unlink(`imgs/big/${ficha.imagenes[i]}`),
-                        fs.unlink(`imgs/medium/${ficha.imagenes[i]}`),
+                        fs.unlink(`imgs/big/${ficha.imagenes[j]}`),
+                        fs.unlink(`imgs/medium/${ficha.imagenes[j]}`),
                     ]);
                 }
+
                 await Promise.all([
                     fs.unlink(`imgs/big/${moto[i].img}`),
                     fs.unlink(`imgs/medium/${moto[i].img}`),

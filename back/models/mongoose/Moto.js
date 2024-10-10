@@ -12,6 +12,10 @@ const MotoSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "Estilo",
     },
+    fichaTecnica: {
+        type: mongoose.Schema.ObjectId,
+        ref: "FichaTecnica",
+    },
 });
 
 export default mongoose.model("Moto", MotoSchema);

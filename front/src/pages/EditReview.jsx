@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import keys from "../constants/keysReviewForm";
 import zodSchema from "../schemas/reviewForm";
-import { useEffect } from "react";
 
 export default function EditarReview() {
     const queryClient = useQueryClient();
@@ -52,16 +51,10 @@ export default function EditarReview() {
         handleSubmit,
         watch,
         formState: { errors },
-        reset,
     } = useForm({
         resolver: zodResolver(zodSchema),
+        values: reviewQuery.data,
     });
-
-    useEffect(() => {
-        if (reviewQuery.data) {
-            reset(reviewQuery.data);
-        }
-    }, [reviewQuery.data, reset]);
 
     if (reviewQuery.isLoading) {
         return <div>Cargando...</div>;

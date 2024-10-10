@@ -27,6 +27,7 @@ import Tipos from "./pages/Tipos";
 import MarcasCrud from "./pages/MarcasCrud";
 import Motos from "./pages/Motos";
 import CrearMoto from "./pages/CrearMoto";
+import EditarMoto from "./pages/EditarMoto";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -91,6 +92,7 @@ export default function App() {
                         <Route path="motos">
                             <Route index element={<Motos />} />
                             <Route path="crear" element={<CrearMoto />} />
+                            <Route path="editar/:id" element={<EditarMoto />} />
                         </Route>
                     </Route>
                 </Route>

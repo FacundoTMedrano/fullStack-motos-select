@@ -1,0 +1,37 @@
+const keys = {
+    moto: { nombre: "moto.nombre", marca: "moto.marca", estilo: "moto.estilo" },
+    mecanica: {
+        Motor: "mecanica.Motor",
+        Cilindrada: "mecanica.Cilindrada",
+        "Potencia máxima": "mecanica.Potencia máxima",
+        "Velocidad máxima": "mecanica.Velocidad máxima",
+        Alimentación: "mecanica.Alimentación",
+        Encendido: "mecanica.Encendido",
+        Arranque: "mecanica.Arranque",
+        Transmisión: "mecanica.Transmisión",
+        Tracción: "mecanica.Tracción",
+    },
+    configuracion: {
+        "Faro Delantero": "configuracion.Faro Delantero",
+        Llantas: "configuracion.Llantas",
+        "Frenos D / T": "configuracion.Frenos D / T",
+        "Neumático Delantero": "configuracion.Neumático Delantero",
+        "Neumático Trasero": "configuracion.Neumático Trasero",
+        "Suspensión Delantera": "configuracion.Suspensión Delantera",
+        "Suspensión Trasera": "configuracion.Suspensión Trasera",
+        "Largo / Ancho / Alto": "configuracion.Largo / Ancho / Alto",
+        "Distancia entre Ejes": "configuracion.Distancia entre Ejes",
+        Peso: "configuracion.Peso",
+        "Capacidad de Carga": "configuracion.Capacidad de Carga",
+        "Capacidad del Tanque": "configuracion.Capacidad del Tanque",
+        "Consumo y Autonomía": "configuracion.Consumo y Autonomía",
+        "Puerto USB": "configuracion.Puerto USB",
+        "Altura del Asiento": "configuracion.Altura del Asiento",
+        Equipamiento: "configuracion.Equipamiento",
+        "Tipo de Batería": "configuracion.Tipo de Batería",
+        "Cantidad de Baterías": "configuracion.Cantidad de Baterías",
+        "Tiempo de Carga": "configuracion.Tiempo de Carga",
+    },
+};
+
+export default keys;

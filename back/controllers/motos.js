@@ -9,6 +9,7 @@ import sharp from "sharp";
 import fs from "node:fs/promises";
 import Review from "../models/mongoose/Review.js";
 import fichaMecanConfigValidate from "../schemas/zod/fichaTecnica.js";
+import saveImg from "../utils/saveImg.js";
 
 export class MotoController {
     async getAll(req, res) {
@@ -42,22 +43,48 @@ export class MotoController {
     }
 
     async create(req, res) {
+        console.log(
+            JSON.parse(req.body.mecanica),
+            JSON.parse(req.body.configuracion),
+            JSON.parse(req.body.moto),
+        );
+        // console.log(req.body, req.files);
         const motoImg = req.files?.["motoImg"][0];
         const fichaImgs = req.files?.["fichaImgs"];
-        if (!motoImg || !fichaImgs || !req.body?.ficha || req.body?.moto) {
-            throw new CustomErrors.BadRequestError("bad data moto");
+        if (
+            !motoImg ||
+            !fichaImgs ||
+            !req.body?.mecanica ||
+            !req.body?.configuracion ||
+            !req.body?.moto
+        ) {
+            throw new CustomErrors.BadRequestError(
+                "bad data moto en la recibida",
+            );
         }
         const moto = z
             .object({
                 nombre: z.string().min(1),
                 marca: z.string().min(1),
-                estilo: z.string().min(1).optional(),
-                cilindrada: z.number().min(0).optional(),
+                estilo: z.string().optional(),
+                cilindrada: z.number().min(0),
             })
-            .safeParse(req.body.moto);
-        const ficha = fichaMecanConfigValidate(req.body.ficha);
+            .safeParse(JSON.parse(req.body.moto));
+
+        const ficha = fichaMecanConfigValidate({
+            mecanica: JSON.parse(req.body.mecanica),
+            configuracion: JSON.parse(req.body.configuracion),
+        });
         if (!moto.success || !ficha.success) {
-            throw new CustomErrors.BadRequestError("bad data moto");
+            console.log(
+                "moto errors-->",
+                moto.error?.errors,
+                "ficha errors-->",
+                ficha.error?.errors,
+            );
+            throw new CustomErrors.BadRequestError(
+                "bad data moto en la verificacion",
+            );
         }
 
         const nombreNuevo = `${nanoid(10)}${path.extname(motoImg.originalname)}`;
@@ -70,42 +97,40 @@ export class MotoController {
             .toFile(`imgs/medium/${nombreNuevo}`);
 
         moto.data.img = nombreNuevo;
-        const nuevaMoto = await Moto.create(moto.data);
+        const nuevaMoto = new Moto(moto.data);
 
-        // const ficha = { informacion: req.body.ficha.informacion }; //solo deberia tener {informacion}
-        ficha.data.moto = nuevaMoto._id;
         const imagenes = [];
         for (let i = 0; i < fichaImgs.length; i++) {
-            const nombreNuevo = `${nanoid(10)}${path.extname(fichaImgs[i].originalname)}`;
-            await fs.writeFile(`imgs/big/${nombreNuevo}`, fichaImgs[i].buffer);
-            const metadata = await sharp(fichaImgs[i].buffer).metadata();
-            const mitadancho = Math.floor(metadata.width / 2);
-            const mitadAlto = Math.floor(metadata.height / 2);
-            await sharp(fichaImgs[i].buffer)
-                .resize(mitadancho, mitadAlto)
-                .toFile(`imgs/medium/${nombreNuevo}`);
+            const nombreNuevo = await saveImg(fichaImgs[i]);
+            // const nombreNuevo = `${nanoid(10)}${path.extname(fichaImgs[i].originalname)}`;
+            // await fs.writeFile(`imgs/big/${nombreNuevo}`, fichaImgs[i].buffer);
+            // const metadata = await sharp(fichaImgs[i].buffer).metadata();
+            // const mitadancho = Math.floor(metadata.width / 2);
+            // const mitadAlto = Math.floor(metadata.height / 2);
+            // await sharp(fichaImgs[i].buffer)
+            //     .resize(mitadancho, mitadAlto)
+            //     .toFile(`imgs/medium/${nombreNuevo}`);
             imagenes.push(nombreNuevo);
         }
         ficha.data.imagenes = imagenes;
 
         const newFicha = await FichaTecnica.create(ficha.data);
-
+        nuevaMoto.fichaTecnica = newFicha._id;
+        await nuevaMoto.save();
         return res
             .status(StatusCodes.CREATED)
             .json({ fichaTecnica: newFicha, moto: nuevaMoto });
     }
 
     async delete(req, res) {
-        if (!req.paras.id) {
+        if (!req.params.id) {
             throw new CustomErrors.NotFoundError("not found moto id");
         }
         const moto = await Moto.findByIdAndDelete(req.params.id);
         if (!moto) {
             throw new CustomErrors.NotFoundError("not found moto id");
         }
-        const ficha = await FichaTecnica.findOneAndDelete({
-            moto: moto.fichaTecnica,
-        });
+        const ficha = await FichaTecnica.findByIdAndDelete(moto.fichaTecnica);
         if (!ficha) {
             throw new CustomErrors.NotFoundError("not found ficha id");
         }
@@ -129,22 +154,28 @@ export class MotoController {
     }
 
     async update(req, res) {
-        const motoImg = req.files?.["motoImg"][0];
-        const fichaImgs = req.files?.["fichaImgs"];
-        if (!req.body?.ficha || req.body?.moto || !req.params?.id) {
+        const motoImg = req.files?.["motoImg"]?.[0];
+        const fichaImgs = req.files?.["fichaImgs"] ?? [];
+        if (!req.body?.datos || !req.params?.id) {
             throw new CustomErrors.BadRequestError("bad data moto");
         }
+        const datos = JSON.parse(req.body.datos);
         const moto = z
             .object({
                 nombre: z.string().min(1),
                 marca: z.string().min(1),
-                estilo: z.string().min(1).optional(),
-                cilindrada: z.number().min(0).optional(),
+                estilo: z.string().optional(),
+                cilindrada: z.number().min(0),
             })
-            .safeParse(req.body.moto);
-        const ficha = fichaMecanConfigValidate(req.body.ficha);
+            .safeParse(datos.moto ?? {});
+
+        const ficha = fichaMecanConfigValidate({
+            mecanica: datos.mecanica ?? {},
+            configuracion: datos.configuracion ?? {},
+        });
 
         if (!moto.success || !ficha.success) {
+            console.log("errores--->", moto.error?.errors, ficha.error?.errors);
             throw new CustomErrors.BadRequestError("bad data moto");
         }
         const motoDB = await Moto.findById(req.params.id);
@@ -152,7 +183,7 @@ export class MotoController {
             throw new CustomErrors.NotFoundError("id not found");
         }
 
-        const fichaDB = await FichaTecnica.findOne({ moto: motoDB._id });
+        const fichaDB = await FichaTecnica.findById(motoDB.fichaTecnica);
         if (!fichaDB) {
             throw new CustomErrors.NotFoundError("id ficha not found");
         }
@@ -163,14 +194,8 @@ export class MotoController {
                 fs.unlink(`imgs/big/${motoDB.img}`),
                 fs.unlink(`imgs/medium/${motoDB.img}`),
             ]);
-            const nombreNuevo = `${nanoid(10)}${path.extname(motoImg.originalname)}`;
-            await fs.writeFile(`imgs/big/${nombreNuevo}`, motoImg.buffer);
-            const metadata = await sharp(motoImg.buffer).metadata();
-            const mitadancho = Math.floor(metadata.width / 2);
-            const mitadAlto = Math.floor(metadata.height / 2);
-            await sharp(motoImg.buffer)
-                .resize(mitadancho, mitadAlto)
-                .toFile(`imgs/medium/${nombreNuevo}`);
+            const nombreNuevo = await saveImg(motoImg); //guardo la nueva imagen
+            console.log(nombreNuevo);
             moto.data.img = nombreNuevo;
         }
         for (let key in moto.data) {
@@ -182,25 +207,14 @@ export class MotoController {
         if (fichaImgs.length > 0) {
             const imagenes = [];
             for (let i = 0; i < fichaImgs.length; i++) {
-                const nombreNuevo = `${nanoid(10)}${path.extname(fichaImgs[i].originalname)}`;
-                await fs.writeFile(
-                    `imgs/big/${nombreNuevo}`,
-                    fichaImgs[i].buffer,
-                );
-                const metadata = await sharp(fichaImgs[i].buffer).metadata();
-                const mitadancho = Math.floor(metadata.width / 2);
-                const mitadAlto = Math.floor(metadata.height / 2);
-                await sharp(fichaImgs[i].buffer)
-                    .resize(mitadancho, mitadAlto)
-                    .toFile(`imgs/medium/${nombreNuevo}`);
-
+                const nombreNuevo = await saveImg(fichaImgs[i]);
                 imagenes.push(nombreNuevo);
             }
             fichaDB.imagenes.push(...imagenes);
         }
 
-        if (req.body.ficha.eliminar > 0) {
-            const eliminar = req.body.ficha.eliminar;
+        if (datos.eliminar?.length > 0) {
+            const eliminar = datos.eliminar;
             for (let i = 0; i < eliminar.length; i++) {
                 await Promise.all([
                     fs.unlink(`imgs/big/${eliminar[i]}`),

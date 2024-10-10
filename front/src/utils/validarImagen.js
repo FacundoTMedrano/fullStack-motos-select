@@ -5,6 +5,7 @@ export default function validarImagen(file) {
         "image/jpg",
         "image/png",
         "image/webp",
+        "image/gif",
     ];
     const isValidType = validTypes.includes(file.type);
     if (!isValidType) {
@@ -14,4 +15,5 @@ export default function validarImagen(file) {
     if (!isValidSize) {
         return "tamaño maximo excedido";
     }
+    return null;
 }

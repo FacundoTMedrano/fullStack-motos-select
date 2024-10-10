@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const FichaTecnicaSchema = new mongoose.Schema({
-    moto: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Moto",
-    },
     mecanica: {
         Motor: String,
         Cilindrada: String,
