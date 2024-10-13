@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../services/api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useContexto from "../hooks/useContexto";
 import { useEffect } from "react";
+import { base } from "../rutas";
+
 export default function MotosPorMarca() {
     const marca = useParams().marca.replace(/_/g, " "); //leo la marca en el param
-
     const { setSelectCaract, setListaOpcionesMotos } = useContexto();
 
     const { data: motos } = useQuery({
@@ -15,8 +16,6 @@ export default function MotosPorMarca() {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const { data: marcas } = useQuery({
@@ -26,19 +25,17 @@ export default function MotosPorMarca() {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const marcaElemento = marcas.find(
         (v) => v.marca.toLowerCase() === marca.toLowerCase()
     );
-    //este useEffect se ejecuta al final de toda la funcion
-    //pero siempre debe estar por lo que no puede ir dentro de un condicional
+    //useEffect se ejecuta al final del renderizado por lo cual es como si estuviera abajo de motosElementos
     useEffect(() => {
         if (marcaElemento) {
-            const obj = { grupo: "marca", valor: marcaElemento.marca };
-            setSelectCaract(JSON.stringify(obj));
+            setSelectCaract(
+                JSON.stringify({ grupo: "marca", valor: marcaElemento.marca })
+            );
             setListaOpcionesMotos(motosElementos);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,10 +53,21 @@ export default function MotosPorMarca() {
             </div>
         );
     }
+    
     return (
         <div>
             {motosElementos.map((v) => {
-                return <div key={v._id}>{v.nombre}</div>;
+                const imgBig = `${base}/imgs/big/${v.img}`;
+                const imgMedium = `${base}/imgs/medium/${v.img}`;
+                return (
+                    <Link key={v._id} to={`/ficha_tecnica/${v.nombre}`}>
+                        <img
+                            src={imgBig}
+                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                            style={{ width: "250px" }}
+                        />
+                    </Link>
+                );
             })}
         </div>
     );

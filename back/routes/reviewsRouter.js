@@ -11,6 +11,7 @@ router.get("/get-all", verifyJWT, verifyRoles(["admin"]), review.getAll);
 router.get("/moto/:id", review.getAllbyMoto);
 router.get("/review-from-moto/:id", verifyJWT, review.getReviewFromMoto);
 router.get("/get-by-user/:id", verifyJWT, verifyRoles(["admin"]), review.getByUser);
+router.get("/get-by-user-populate/:id", verifyJWT, verifyRoles(["admin"]), review.getByUserWithPopulate);
 router.get("/my-reviews", verifyJWT, review.getByMyAcount);
 router.get("/get-single-review/:id", verifyJWT, verifyRoles(["admin"]), review.getSingleReview);
 router.get("/get-review/:id", verifyJWT, review.getMySingleReview);

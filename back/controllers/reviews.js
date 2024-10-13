@@ -49,6 +49,17 @@ export class ReviewController {
         return res.status(StatusCodes.OK).json(reviews);
     }
 
+    async getByUserWithPopulate(req, res) {
+        if (!req.params?.id) {
+            throw new CustomErrors.BadRequestError("provide values");
+        }
+        const reviews = await Review.find({ user: req.params.id }).populate([
+            { path: "moto", select: "nombre" },
+            { path: "marca", select: "marca" },
+        ]);
+        return res.status(StatusCodes.OK).json(reviews);
+    }
+
     //user
     async getByMyAcount(req, res) {
         const reviews = await Review.find({ user: req.id }).populate({
@@ -119,10 +130,11 @@ export class ReviewController {
     //admin
     async updateStateById(req, res) {
         const state = req.body?.state;
+        console.log(req.body);
         if (!state || !req.params?.id) {
             throw new CustomErrors.BadRequestError("provide values");
         }
-        const result = ["approverd", "disapproved", "pending"].includes(state);
+        const result = ["approved", "disapproved", "pending"].includes(state);
         if (!result) {
             throw new CustomErrors.BadRequestError("provide right values");
         }

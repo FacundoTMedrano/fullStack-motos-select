@@ -18,9 +18,7 @@ export default function Reviews() {
             const { data } = await axiosPrivate.get("reviews/my-reviews");
             return data;
         },
-        refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity,
     });
 
     const eliminarReview = useMutation({

@@ -11,6 +11,7 @@ export default function Reviews({ moto }) {
     const {
         auth: { role },
     } = useAuth();
+
     const { isLoading, isError, data } = useQuery({
         queryKey: ["reviews", moto._id],
         queryFn: async () => {
@@ -18,8 +19,6 @@ export default function Reviews({ moto }) {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     if (isLoading) {
@@ -29,22 +28,8 @@ export default function Reviews({ moto }) {
         return <div>error en el fetch</div>;
     }
 
-    let formulario;
-
-    if (!role) {
-        formulario = (
-            <div>
-                <p>logeese para dejar un review</p>
-                <Link to={`/login`}>login</Link>
-            </div>
-        );
-    } else {
-        //modificar luego para que si ya tiene un dato llenado le diga que ya tiene review
-        formulario = <ReviewForm moto={moto} />;
-    }
-
     const avg = getAvg(data);
-
+    
     return (
         <div>
             {data.length === 0 ? (
@@ -95,7 +80,14 @@ export default function Reviews({ moto }) {
                     </div>
                 </div>
             )}
-            {formulario}
+            {!role ? (
+                <div>
+                    <p>logeese para dejar un review</p>
+                    <Link to={`/login`}>login</Link>
+                </div>
+            ) : (
+                <ReviewForm moto={moto} />
+            )}
         </div>
     );
 }

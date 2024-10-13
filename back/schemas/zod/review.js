@@ -18,6 +18,7 @@ export function validateReview(input) {
             opinionNegativa: z.string().optional(),
             user: z.string(),
             state: z.string(),
+            marca: z.string(),
         })
         .safeParse(input);
 }

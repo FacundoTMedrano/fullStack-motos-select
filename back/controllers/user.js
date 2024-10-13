@@ -7,7 +7,54 @@ import z from "zod";
 export class UserController {
     //admin
     async getAll(req, res) {
-        const users = await User.find();
+        const users = await User.aggregate([
+            {
+                $lookup: {
+                    from: "reviews", // La colección de reviews
+                    localField: "_id", // Campo en Usuarios
+                    foreignField: "user", // Campo en Reviews que referencia al usuario
+                    as: "reviews", // Alias para las reviews del usuario
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    email: 1,
+                    role: 1,
+                    totalReviews: { $size: "$reviews" }, // Total de reviews
+                    approvedCount: {
+                        $size: {
+                            $filter: {
+                                input: "$reviews", // Array de reviews
+                                as: "review",
+                                cond: { $eq: ["$$review.state", "approved"] }, // Contar solo los aprobados
+                            },
+                        },
+                    },
+                    disapprovedCount: {
+                        $size: {
+                            $filter: {
+                                input: "$reviews",
+                                as: "review",
+                                cond: {
+                                    $eq: ["$$review.state", "disapproved"],
+                                }, // Contar solo los desaprobados
+                            },
+                        },
+                    },
+                    pendingCount: {
+                        $size: {
+                            $filter: {
+                                input: "$reviews",
+                                as: "review",
+                                cond: { $eq: ["$$review.state", "pending"] }, // Contar solo los pendientes
+                            },
+                        },
+                    },
+                },
+            },
+        ]);
         return res.status(StatusCodes.OK).json(users);
     }
 

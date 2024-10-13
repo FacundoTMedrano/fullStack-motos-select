@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../services/api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useContexto from "../hooks/useContexto";
 import { useEffect } from "react";
+import { base } from "../rutas";
 
 export default function MotosPorEstilo() {
     const estilo = useParams().estilo.replace(/_/g, " "); //leo el estilo en el param
@@ -16,8 +17,6 @@ export default function MotosPorEstilo() {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const { data: estilos } = useQuery({
@@ -27,20 +26,16 @@ export default function MotosPorEstilo() {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const elementoEstilo = estilos.find(
         (v) => v.estilo.toLowerCase() === estilo.toLowerCase()
     );
 
-    //este useEffect se ejecuta al final de toda la funcion
-    //pero siempre debe estar por lo que no puede ir dentro de un condicional
+    //este useEffect se ejecuta despues del renderizado
     useEffect(() => {
         if (elementoEstilo) {
-            const obj = { grupo: "estilo", valor: estilo };
-            setSelectCaract(JSON.stringify(obj));
+            setSelectCaract(JSON.stringify({ grupo: "estilo", valor: estilo }));
             setListaOpcionesMotos(motosPorEstilo);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +54,17 @@ export default function MotosPorEstilo() {
     return (
         <div>
             {motosPorEstilo.map((v) => {
-                return <div key={v._id}>{v.nombre}</div>;
+                const imgBig = `${base}/imgs/big/${v.img}`;
+                const imgMedium = `${base}/imgs/medium/${v.img}`;
+                return (
+                    <Link key={v._id} to={`/ficha_tecnica/${v.nombre}`}>
+                        <img
+                            src={imgBig}
+                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                            style={{ width: "250px" }}
+                        />
+                    </Link>
+                );
             })}
         </div>
     );

@@ -15,6 +15,7 @@ export default function FichaTecnicaPage() {
         setListaOpcionesMotos,
     } = useContexto();
     const { datos } = useDatos();
+
     const motoBusqueda = datos.motos.find(
         (v) => v.nombre.toLowerCase() === moto.toLowerCase()
     );
@@ -22,11 +23,11 @@ export default function FichaTecnicaPage() {
     useEffect(() => {
         const obj = JSON.stringify({ grupo: "", valor: "" });
         if (selectCarac === obj && motoBusqueda) {
+            const motosPorMarca = datos.motos.filter(
+                (v) => v.marca === motoBusqueda.marca
+            );
             const marcaElemento = datos.marcas.find(
                 (v) => v._id === motoBusqueda.marca
-            );
-            const motosPorMarca = datos.motos.filter(
-                (v) => v.marca === marcaElemento._id
             );
             setListaOpcionesMotos(motosPorMarca);
             setSelectCaract(
@@ -36,6 +37,9 @@ export default function FichaTecnicaPage() {
 
         if (motoBusqueda) {
             setSelectMoto(motoBusqueda.nombre);
+        }
+        if (!motoBusqueda) {
+            setListaOpcionesMotos(datos.motos);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moto]);

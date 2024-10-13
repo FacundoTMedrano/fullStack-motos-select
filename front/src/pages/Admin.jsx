@@ -11,6 +11,8 @@ export default function Admin() {
                 <NavLink to={"/admin/marcas"}>Marcas</NavLink>
                 <NavLink to={"/admin/tipos"}>Tipos</NavLink>
                 <NavLink to={"/admin/cilindradas"}>Cilindradas</NavLink>
+                <NavLink to={"/admin/all-reviews"}>All Reviews</NavLink>
+                <NavLink to={"/admin/ver-usuarios"}>Ver Usuarios</NavLink>
             </nav>
             <Outlet />
         </div>

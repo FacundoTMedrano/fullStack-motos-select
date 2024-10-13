@@ -7,22 +7,14 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 export default function FichaTecnica({ moto }) {
-    const { isLoading, isError, data } = useQuery({
+    const ficha = useQuery({
         queryKey: ["ficha", moto._id],
         queryFn: async () => {
             const { data } = await axiosPublic(`fichas/${moto.fichaTecnica}`);
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
-    if (isLoading) {
-        return <div>Cargando</div>;
-    }
-    if (isError) {
-        return <div>error en el fetch</div>;
-    }
 
     const settings = {
         infinite: true,
@@ -33,51 +25,75 @@ export default function FichaTecnica({ moto }) {
         autoplaySpeed: 2000,
     };
 
-    if (data.imagenes.length === 1) {
-        data.imagenes[1] = data.imagenes[0];
+    if (ficha.isLoading) {
+        return <div>Cargando</div>;
     }
-    const imagenes = data.imagenes.map((v) => {
-        return (
-            <div key={v}>
-                <img style={{ width: "300px" }} src={`${base}/imgs/big/${v}`} />
-            </div>
-        );
-    });
-    const informacion = data.informacion.map((v) => {
-        return (
-            <div key={v.grupo}>
-                <h2>{v.grupo}</h2>
-                <table>
-                    <tbody>
-                        {Object.entries(v.propiedades).map((v) => {
-                            const [key, value] = v;
-                            let valor = value;
+
+    if (ficha.isError) {
+        return <div>error en el fetch</div>;
+    }
+
+    console.log(ficha.data);
+
+    if (ficha.data.imagenes.length === 1) {
+        ficha.data.imagenes[1] = ficha.data.imagenes[0];
+    }
+
+    return (
+        <div>
+            <Slider {...settings}>
+                {ficha.data.imagenes.map((v) => {
+                    return (
+                        <div key={v}>
+                            <img
+                                style={{ width: "300px" }}
+                                src={`${base}/imgs/big/${v}`}
+                            />
+                        </div>
+                    );
+                })}
+            </Slider>
+            <table>
+                <tbody>
+                    {Object.entries(ficha.data.mecanica).map(([key, value]) => {
+                        return (
+                            <tr key={key}>
+                                <th>{key}</th>
+                                <td>{value}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    {Object.entries(ficha.data.configuracion).map(
+                        ([key, value]) => {
+                            if (value.length === 0) return null;
+                            let val = value;
                             if (Array.isArray(value)) {
-                                valor = (
+                                val = (
                                     <ul>
                                         {value.map((v) => {
-                                            return <li key={v}>{v}</li>;
+                                            return (
+                                                <li key={v.slice(0, 10)}>
+                                                    {v}
+                                                </li>
+                                            );
                                         })}
                                     </ul>
                                 );
                             }
-
                             return (
                                 <tr key={key}>
                                     <th>{key}</th>
-                                    <td>{valor}</td>
+                                    <td>{val}</td>
                                 </tr>
                             );
-                        })}
-                    </tbody>
-                </table>
-            </div>
-        );
-    });
-    return (
-        <div>
-            <Slider {...settings}>{imagenes}</Slider>
-            {informacion}
+                        }
+                    )}
+                </tbody>
+            </table>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useContexto from "../hooks/useContexto";
 import useAuth from "../hooks/useAuth";
@@ -9,6 +9,7 @@ export default function LogoutButon() {
         auth: { role },
         setAuth,
     } = useAuth();
+
     const { setSelectCaract, setSelectMoto } = useContexto();
     const navi = useNavigate();
     const axios = useAxiosPrivate();
@@ -38,24 +39,19 @@ export default function LogoutButon() {
         },
     });
 
-    let button;
     if (!role) {
-        button = (
+        return (
             <div>
-                <NavLink to={"register"}>register</NavLink>
-                <NavLink to={"login"}>login</NavLink>
+                <Link to={"register"}>register</Link>
+                <Link to={"login"}>login</Link>
             </div>
         );
     } else {
-        button = (
+        return (
             <div>
-                <button onClick={() => navi(`/${role}`)}>{role}</button>
-                <button disabled={salirMut.isPending} onClick={salirMut.mutate}>
-                    salir
-                </button>
+                <Link to={`/${role}`}>{role}</Link>
+                <Link onClick={salirMut.mutate}>salir</Link>
             </div>
         );
     }
-
-    return button;
 }

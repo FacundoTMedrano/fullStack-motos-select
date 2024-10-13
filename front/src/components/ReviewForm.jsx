@@ -31,10 +31,8 @@ export default function ReviewForm({ moto }) {
             console.log(data);
             return data;
         },
-        retry: 0,
+        retry: 1,
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const enviarForm = useMutation({
@@ -42,6 +40,7 @@ export default function ReviewForm({ moto }) {
             const { data } = await axiosPrivate.post("reviews/create", {
                 ...datos,
                 moto: moto._id,
+                marca: moto.marca,
             });
             console.log(data);
         },
@@ -58,6 +57,9 @@ export default function ReviewForm({ moto }) {
             });
         },
     });
+
+    //si retorna un error quiere decir que no tiene review, estoy pidiendo mi review en base a mi token
+    // creo que deberia ser distinto
 
     if (miReview.isSuccess) {
         return <div>ya tiene un review</div>;
@@ -88,7 +90,7 @@ export default function ReviewForm({ moto }) {
                             })}
                         />
                         <p>{watch(v)}</p>
-                        {errors?.[v]?.message && <p>{errors[v].message}</p>}
+                        {errors?.[v] && <p>{errors[v].message}</p>}
                     </Fragment>
                 );
             })}

@@ -20,6 +20,10 @@ const ReviewSchema = new mongoose.Schema(
             type: mongoose.Schema.ObjectId,
             ref: "User",
         },
+        marca: {
+            type: mongoose.Schema.ObjectId,
+            ref: "Marca",
+        },
         opinionPositiva: String,
         opinionNegativa: String,
         state: {

@@ -28,6 +28,10 @@ import MarcasCrud from "./pages/MarcasCrud";
 import Motos from "./pages/Motos";
 import CrearMoto from "./pages/CrearMoto";
 import EditarMoto from "./pages/EditarMoto";
+import AllReviews from "./pages/AllReviews";
+import ReviewSeeOneAdmin from "./pages/ReviewSeeOneAdmin";
+import SeeUsers from "./pages/SeeUsers";
+import SeeReviesOfUsers from "./pages/SeeReviesOfUsers";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -94,6 +98,15 @@ export default function App() {
                             <Route path="crear" element={<CrearMoto />} />
                             <Route path="editar/:id" element={<EditarMoto />} />
                         </Route>
+                        <Route path="all-reviews">
+                            <Route index element={<AllReviews />} />
+                            <Route path=":id" element={<ReviewSeeOneAdmin />} />
+                        </Route>
+                        <Route path="ver-usuarios" element={<SeeUsers />} />
+                        <Route
+                            path="ver-usuarios/:id"
+                            element={<SeeReviesOfUsers />}
+                        />
                     </Route>
                 </Route>
                 <Route element={<RoleReq rolePermitido={"user"} />}>

@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosPublic } from "../services/api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useContexto from "../hooks/useContexto";
 import { useEffect } from "react";
+import { base } from "../rutas";
 
 export default function MotosPorCilindrada() {
     const [min, max] = useParams()
@@ -18,8 +19,6 @@ export default function MotosPorCilindrada() {
             return data;
         },
         refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        staleTime: Infinity,
     });
 
     const motosCilindradas = motos.filter(
@@ -29,8 +28,9 @@ export default function MotosPorCilindrada() {
     //este useEffect se ejecuta al final de toda la funcion
     //pero siempre debe estar por lo que no puede ir dentro de un condicional
     useEffect(() => {
-        const obj = { grupo: "cilindrada", valor: `${min}-${max}` };
-        setSelectCaract(JSON.stringify(obj));
+        setSelectCaract(
+            JSON.stringify({ grupo: "cilindrada", valor: `${min}-${max}` })
+        );
         setListaOpcionesMotos(motosCilindradas);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +43,17 @@ export default function MotosPorCilindrada() {
     return (
         <div>
             {motosCilindradas.map((v) => {
-                return <div key={v._id}>{v.nombre}</div>;
+                const imgBig = `${base}/imgs/big/${v.img}`;
+                const imgMedium = `${base}/imgs/medium/${v.img}`;
+                return (
+                    <Link key={v._id} to={`/ficha_tecnica/${v.nombre}`}>
+                        <img
+                            src={imgBig}
+                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                            style={{ width: "250px" }}
+                        />
+                    </Link>
+                );
             })}
         </div>
     );

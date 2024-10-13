@@ -12,15 +12,8 @@ export default function Dashboard() {
         listaOpcionesMotos,
     } = useContexto();
     const navigate = useNavigate();
+    
     const { loading, error, datos } = useDatos();
-
-    // setListaOpcionesMotos(datos?.motos??[]);
-    if (loading) {
-        return <div>Cargando</div>;
-    }
-    if (error) {
-        return <div>errores</div>;
-    }
 
     function handleChangeCarac(e) {
         const { grupo, valor } = JSON.parse(e.target.value);
@@ -33,6 +26,14 @@ export default function Dashboard() {
     function handleChangeMoto(e) {
         setSelectMoto(e.target.value);
         navigate(`ficha_tecnica/${e.target.value.replace(/\s/g, "_")}`);
+    }
+
+    // setListaOpcionesMotos(datos?.motos??[]);
+    if (loading) {
+        return <div>Cargando</div>;
+    }
+    if (error) {
+        return <div>errores</div>;
     }
 
     return (
