@@ -52,6 +52,7 @@ export default function MotosPorCilindrada() {
                             srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
                             style={{ width: "250px" }}
                         />
+                        <h2>{v.nombre}</h2>
                     </Link>
                 );
             })}

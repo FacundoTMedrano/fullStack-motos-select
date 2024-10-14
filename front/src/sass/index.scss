@@ -1,0 +1,31 @@
+@import "marcasPage";
+
+header {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    nav {
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        align-items: center;
+        padding-bottom: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .imgLogo {
+        display: block;
+        width: 100%;
+        max-width: 150px;
+        min-width: 100px;
+    }
+}
+
+.motosMarca {
+    img {
+        width: 100%;
+        max-width: 200px;
+    }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+}

@@ -33,24 +33,23 @@ export default function Marcas() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div>
-            <div>
-                <ul>
-                    {marcas.map((v) => {
-                        const valorMarca = v.marca.replace(" ", "_");
-                        return (
-                            <div key={v._id}>
-                                <Link to={`marca/${valorMarca}`}>
-                                    <img
-                                        src={`${base}/imgs/basics/${v.img}`}
-                                        alt={v.marca}
-                                    />
-                                </Link>
-                            </div>
-                        );
-                    })}
-                </ul>
-            </div>
+        <div className="marcasPage">
+            <h1>Marcas de Motos</h1>
+            <ul>
+                {marcas.map((v) => {
+                    const valorMarca = v.marca.replace(" ", "_");
+                    return (
+                        <li key={v._id}>
+                            <Link to={`marca/${valorMarca}`}>
+                                <img
+                                    src={`${base}/imgs/basics/${v.img}`}
+                                    alt={v.marca}
+                                />
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
         </div>
     );
 }

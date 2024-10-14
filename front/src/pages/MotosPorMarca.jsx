@@ -53,9 +53,9 @@ export default function MotosPorMarca() {
             </div>
         );
     }
-    
+
     return (
-        <div>
+        <div className="motosMarca">
             {motosElementos.map((v) => {
                 const imgBig = `${base}/imgs/big/${v.img}`;
                 const imgMedium = `${base}/imgs/medium/${v.img}`;
@@ -66,6 +66,7 @@ export default function MotosPorMarca() {
                             srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
                             style={{ width: "250px" }}
                         />
+                        <h2>{v.nombre}</h2>
                     </Link>
                 );
             })}
