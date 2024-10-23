@@ -17,5 +17,21 @@ export default function getAvg(lista) {
         avgSumaTotal += Number(avg[v]);
     });
     const avgTotal = (avgSumaTotal / keys.length).toFixed(1);
-    return { avgLista: avg, avgTotal };
+
+    const estrellas = avgTotal / 2;
+    const estrellasCompletas = Math.floor(estrellas);
+    const mediaEstrella = estrellas - estrellasCompletas >= 0.5 ? 1 : 0;
+    const estrellasVacias = 5 - estrellasCompletas - mediaEstrella;
+
+    console.log(estrellasCompletas, mediaEstrella, estrellasVacias);
+
+    return {
+        avgLista: avg,
+        avgTotal,
+        estrellas: {
+            completas: estrellasCompletas,
+            media: mediaEstrella,
+            vacias: estrellasVacias,
+        },
+    };
 }

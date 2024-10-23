@@ -1,0 +1,134 @@
+@use "variables" as v;
+@use "mixin" as m;
+@use "extend-contenedor-input-label";
+// Reviews.jsx y EditarReview.jsx
+
+.signed-review-page {
+    padding: 10px;
+    h1 {
+        font-family: v.$fuente-primaria;
+        color: v.$color-azul-font;
+        text-align: center;
+    }
+    .casillas {
+        @include m.casilla;
+        max-width: 40rem;
+
+        .valores {
+            display: flex;
+            align-items: center;
+
+            h2 {
+                width: 30%;
+                font-size: 1rem;
+                text-align: right;
+                font-family: v.$fuente-primaria;
+                color: v.$color-azul-font;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            span {
+                margin-right: 5px;
+            }
+
+            p {
+                margin-top: 8px;
+                margin-bottom: 8px;
+                font-family: v.$fuente-secundaria;
+            }
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            button {
+                @include m.boton;
+                font-family: v.$fuente-secundaria;
+                padding: 8px 16px;
+            }
+        }
+    }
+}
+
+.signed-review-edit-single {
+    padding: 10px;
+
+    .contenedor {
+        @include m.casilla;
+        max-width: 40rem;
+
+        h1 {
+            text-align: center;
+            font-family: v.$fuente-primaria;
+            color: v.$color-azul-font;
+        }
+
+        form {
+            .valor-texto {
+                display: flex;
+                flex-direction: column;
+                margin: 14px auto;
+
+                label {
+                    font-family: v.$fuente-primaria;
+                    margin-bottom: 7px;
+                    color: v.$color-azul-font;
+                    font-weight: 700;
+                    margin-top: 0;
+                }
+                textarea {
+                    font-family: v.$fuente-secundaria;
+                }
+
+                p {
+                    font-family: v.$fuente-primaria;
+                }
+            }
+
+            .valor-range {
+                display: flex;
+                flex-direction: column;
+                margin-top: 7px;
+                // border: 1px solid black;
+
+                label {
+                    font-family: v.$fuente-secundaria;
+                }
+
+                div {
+                    display: flex;
+                    padding-top: 7px;
+                    padding-bottom: 7px;
+                    align-items: center;
+                    // border: 1px solid red;
+
+                    input {
+                        width: 90%;
+                    }
+
+                    p {
+                        padding: 2px;
+                        margin: auto;
+                        font-family: v.$fuente-secundaria;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+            .botones {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 20px;
+
+                button {
+                    @include m.boton;
+                    padding: 7px 14px;
+                    font-family: v.$fuente-secundaria;
+                }
+            }
+        }
+    }
+}

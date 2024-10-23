@@ -7,13 +7,23 @@ export default function MisDatos() {
     } = useAuth();
 
     return (
-        <div>
-            <p>name: {name}</p>
-            <p>email: {email}</p>
-            <p>role: {role}</p>
-            <div>
-                <p>password: *****</p>
-                <Link to={`/${role}/change_password`}>change Password</Link>
+        <div className="mis-datos-page">
+            <div className="contenedor">
+                <h1>Perfil de Usuario</h1>
+                <div>
+                    <h2>nombre</h2>
+                    <p>{name}</p>
+                </div>
+                <div>
+                    <h2>Correo Electronico</h2>
+                    <p>{email}</p>
+                </div>
+                <div>
+                    <h2>Rol</h2>
+                    <p>{role === "admin" ? "Administrador" : "Usuario"}</p>
+                </div>
+
+                <Link to={`/${role}/change_password`}>Cambiar contraseña</Link>
             </div>
         </div>
     );

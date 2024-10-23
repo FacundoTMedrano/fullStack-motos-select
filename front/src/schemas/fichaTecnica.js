@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const mecanicaSchema = z.object({
     Motor: z.string().min(1, "campo requerido"),
-    Cilindrada: z.number({ message: "se requiere un numero" }).min(1),
+    Cilindrada: z.number({ message: "" }).min(1),
     "Potencia máxima": z.string(),
     "Velocidad máxima": z.string(),
     Alimentación: z.string(),

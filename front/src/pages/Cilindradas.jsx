@@ -1,8 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import zodSchema from "../schemas/cilindradas";
 import { useState } from "react";
 import CilindradaEditForm from "../components/CilindradaEditForm";
 
@@ -29,7 +27,7 @@ export default function Cilindradas() {
         reset,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(zodSchema),
+        // resolver: zodResolver(zodSchema),
     });
 
     const crear = useMutation({
@@ -65,36 +63,66 @@ export default function Cilindradas() {
     }
 
     return (
-        <div>
-            <div>
-                <form onSubmit={handleSubmit(crear.mutate)}>
-                    <input
-                        type="text"
-                        placeholder="titulo"
-                        required
-                        {...register("cilindrada")}
-                    />
-                    {errors?.cilindrada?.message && (
-                        <p>{errors.cilindrada.message}</p>
-                    )}
-                    <input
-                        type="number"
-                        placeholder="min"
-                        required
-                        {...register("min", { valueAsNumber: true })}
-                    />
-                    {errors?.min?.message && <p>{errors.min.message}</p>}
-                    <input
-                        type="number"
-                        placeholder="max"
-                        required
-                        {...register("max", { valueAsNumber: true })}
-                    />
-                    {errors?.max?.message && <p>{errors.max.message}</p>}
-                    <button type="submit">enviar</button>
-                </form>
+        <div className="crear-cilindrada-page">
+            <div className="form-crear-cilindrada">
+                <div className="contenedor">
+                    <h1>Agregar Nuevo Dato</h1>
+                    <form onSubmit={handleSubmit(crear.mutate)}>
+                        <div>
+                            <label htmlFor="titulo-crear">Titulo</label>
+                            <input
+                                id="titulo-crear"
+                                type="text"
+                                {...register("cilindrada", {
+                                    required: "Debe tener nombre",
+                                })}
+                            />
+                            {errors?.cilindrada?.message && (
+                                <p>{errors.cilindrada.message}</p>
+                            )}
+                        </div>
+                        <div>
+                            <label htmlFor="number-min-crear">
+                                Valor Minimo
+                            </label>
+                            <input
+                                id="number-min-crear"
+                                type="number"
+                                {...register("min", {
+                                    required: "Debe tener un minimo",
+                                    valueAsNumber: true,
+                                })}
+                            />
+                            {errors?.min?.message && (
+                                <p>{errors.min.message}</p>
+                            )}
+                        </div>
+                        <div>
+                            <label htmlFor="number-max-crear">
+                                Valor Maximo
+                            </label>
+                            <input
+                                id="number-max-crear"
+                                type="number"
+                                {...register("max", {
+                                    required: "debe tener un numero",
+                                    validate: (v, formValues) => {
+                                        if (formValues.min >= v) {
+                                            return "max debe ser mayor a min";
+                                        }
+                                    },
+                                    valueAsNumber: true,
+                                })}
+                            />
+                            {errors?.max?.message && (
+                                <p>{errors.max.message}</p>
+                            )}
+                        </div>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
             </div>
-            <div>
+            <div className="ver-editar-cilindradas">
                 {cilindradasQuery.data.map((v) => {
                     if (editarId === v._id) {
                         return (
@@ -106,22 +134,29 @@ export default function Cilindradas() {
                         );
                     } else {
                         return (
-                            <div
-                                key={v._id}
-                                style={{
-                                    border: "1px solid black",
-                                    margin: "5px",
-                                }}
-                            >
-                                <p>titulo: {v.cilindrada}</p>
-                                <p>max: {v.max}</p>
-                                <p>min: {v.min}</p>
-                                <button onClick={() => setEditarId(v._id)}>
-                                    editar
-                                </button>
-                                <button onClick={() => eliminar.mutate(v._id)}>
-                                    eliminar
-                                </button>
+                            <div key={v._id} className="casilla">
+                                <div className="valores">
+                                    <p>Titulo:</p>
+                                    <p>{v.cilindrada}</p>
+                                </div>
+                                <div className="valores">
+                                    <p>Valor Minimo:</p>
+                                    <p>{v.max}</p>
+                                </div>
+                                <div className="valores">
+                                    <p>Valor Maximo:</p>
+                                    <p>{v.min}</p>
+                                </div>
+                                <div className="botones">
+                                    <button onClick={() => setEditarId(v._id)}>
+                                        editar
+                                    </button>
+                                    <button
+                                        onClick={() => eliminar.mutate(v._id)}
+                                    >
+                                        eliminar
+                                    </button>
+                                </div>
                             </div>
                         );
                     }

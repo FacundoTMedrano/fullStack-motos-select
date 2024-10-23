@@ -1,0 +1,74 @@
+@use "variables" as v;
+@use "mixin" as m;
+// Motos.jsx
+
+.ver-y-editar-motos-page {
+    h1 {
+        text-align: center;
+        font-family: v.$fuente-primaria;
+        color: v.$color-azul-font;
+    }
+    .crear-select {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        font-family: v.$fuente-primaria;
+
+        button {
+            @include m.boton;
+            padding: 7px 14px;
+        }
+        select {
+            @include m.boton;
+            padding: 7px 14px;
+        }
+    }
+    .casilla-sin-marca {
+        padding: 10px;
+        h2 {
+            @include m.casilla;
+            text-align: center;
+            font-family: v.$fuente-primaria;
+            color: v.$color-azul-font;
+        }
+    }
+    .contenedor {
+        padding: 0 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        max-width: 1200px;
+        margin: auto;
+
+        @media (min-width: v.$breakpoint-tablet) {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        .casilla {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(128, 128, 128, 0.144);
+            font-family: v.$fuente-secundaria;
+
+            img {
+                display: block;
+                width: 100%;
+                margin: auto;
+            }
+            p {
+                // font-family: v.$fuente-secundaria;
+            }
+            .botones {
+                display: flex;
+                justify-content: center;
+                gap: 7px;
+                margin-bottom: 20px;
+                button {
+                    @include m.boton;
+                    padding: 5px 10px;
+                }
+            }
+        }
+    }
+}

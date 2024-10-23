@@ -43,20 +43,16 @@ export class MotoController {
     }
 
     async create(req, res) {
-        console.log(
-            JSON.parse(req.body.mecanica),
-            JSON.parse(req.body.configuracion),
-            JSON.parse(req.body.moto),
-        );
-        // console.log(req.body, req.files);
-        const motoImg = req.files?.["motoImg"][0];
+        const datos = JSON.parse(req.body.datos);
+
+        const motoImg = req.files?.["motoImg"]?.[0];
         const fichaImgs = req.files?.["fichaImgs"];
         if (
             !motoImg ||
             !fichaImgs ||
-            !req.body?.mecanica ||
-            !req.body?.configuracion ||
-            !req.body?.moto
+            !datos.mecanica ||
+            !datos.configuracion ||
+            !datos.moto
         ) {
             throw new CustomErrors.BadRequestError(
                 "bad data moto en la recibida",
@@ -69,12 +65,13 @@ export class MotoController {
                 estilo: z.string().optional(),
                 cilindrada: z.number().min(0),
             })
-            .safeParse(JSON.parse(req.body.moto));
+            .safeParse(datos.moto);
 
         const ficha = fichaMecanConfigValidate({
-            mecanica: JSON.parse(req.body.mecanica),
-            configuracion: JSON.parse(req.body.configuracion),
+            mecanica: datos.mecanica,
+            configuracion: datos.configuracion,
         });
+
         if (!moto.success || !ficha.success) {
             console.log(
                 "moto errors-->",
@@ -102,16 +99,9 @@ export class MotoController {
         const imagenes = [];
         for (let i = 0; i < fichaImgs.length; i++) {
             const nombreNuevo = await saveImg(fichaImgs[i]);
-            // const nombreNuevo = `${nanoid(10)}${path.extname(fichaImgs[i].originalname)}`;
-            // await fs.writeFile(`imgs/big/${nombreNuevo}`, fichaImgs[i].buffer);
-            // const metadata = await sharp(fichaImgs[i].buffer).metadata();
-            // const mitadancho = Math.floor(metadata.width / 2);
-            // const mitadAlto = Math.floor(metadata.height / 2);
-            // await sharp(fichaImgs[i].buffer)
-            //     .resize(mitadancho, mitadAlto)
-            //     .toFile(`imgs/medium/${nombreNuevo}`);
             imagenes.push(nombreNuevo);
         }
+
         ficha.data.imagenes = imagenes;
 
         const newFicha = await FichaTecnica.create(ficha.data);

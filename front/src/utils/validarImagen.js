@@ -7,13 +7,13 @@ export default function validarImagen(file) {
         "image/webp",
         "image/gif",
     ];
-    const isValidType = validTypes.includes(file.type);
+    const isValidType = validTypes.includes(file?.type);
     if (!isValidType) {
-        return "no es del tipo adecuado";
+        return "Tipo de dato incorrecto";
     }
     const isValidSize = file.size <= 5 * 1024 * 1024;
     if (!isValidSize) {
-        return "tamaño maximo excedido";
+        return "Tamaño maximo por imagen excedido";
     }
     return null;
 }

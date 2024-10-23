@@ -155,8 +155,6 @@ export class ReviewController {
             throw new CustomErrors.BadRequestError("provide values");
         }
 
-        req.body.user = req.id;
-        req.body.state = "pending";
         const validacion = z
             .object({
                 motor: z.number(),
@@ -181,14 +179,17 @@ export class ReviewController {
 
             throw new CustomErrors.BadRequestError("provide values");
         }
+
         const review = await Review.findOneAndUpdate(
             { _id: req.params.id, user: req.id },
-            validacion.data,
+            { ...validacion.data, user: req.id, state: "pending" },
             { new: true },
         );
+
         if (!review) {
             throw new CustomErrors.NotFoundError("id not found");
         }
+
         return res.status(StatusCodes.OK).json(review);
     }
 

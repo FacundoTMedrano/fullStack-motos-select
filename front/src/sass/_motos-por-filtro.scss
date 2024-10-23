@@ -1,0 +1,58 @@
+@use "variables";
+// MotosPorMarca.jsx
+// MotosPorCilindrada.jsx
+// MotosPorEstilo.jsx
+
+.motosPorMarca,
+.motosPorCilindrada,
+.motosPorEstilo {
+    h1 {
+        width: fit-content;
+        margin: 25px auto;
+        font-family: variables.$fuente-primaria;
+        color: rgb(17, 26, 139);
+        font-size: 1.8rem;
+
+        @media (min-width: variables.$breakpoint-tablet) {
+            font-size: 2.2rem;
+        }
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        max-width: 1400px;
+        margin: auto;
+        padding: 0;
+
+        @media (min-width: variables.$breakpoint-tablet) {
+            padding: 0 20px;
+        }
+
+        li {
+            list-style: none;
+            border: 1px solid rgba(128, 128, 128, 0.103);
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-decoration: none;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    margin: auto;
+                }
+
+                h2 {
+                    font-family: variables.$fuente-secundaria;
+                    color: variables.$color-azul-font;
+                    text-align: center;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}

@@ -2,9 +2,12 @@ import * as z from "zod";
 
 export default z
     .object({
-        cilindrada: z.string(),
-        max: z.number().min(0),
-        min: z.number().min(0),
+        cilindrada: z.string().min(1, { message: "debe tener un nombre" }),
+        max: z.number({ message: "debe llevar un numero" }).optional(),
+
+        min: z
+            .number({ message: "debe llevar un numero" })
+            .min(1, { message: "debe llevar un numero y ser mayor a 1" }),
     })
     .refine(
         (v) => {

@@ -32,6 +32,8 @@ import AllReviews from "./pages/AllReviews";
 import ReviewSeeOneAdmin from "./pages/ReviewSeeOneAdmin";
 import SeeUsers from "./pages/SeeUsers";
 import SeeReviesOfUsers from "./pages/SeeReviesOfUsers";
+import CrearMarca from "./pages/CrearMarca";
+import EditarMarca from "./pages/EditarMarca";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -84,29 +86,42 @@ export default function App() {
                 <Route element={<RoleReq rolePermitido={"admin"} />}>
                     <Route path="admin" element={<Admin />}>
                         <Route index element={<MisDatos />} />
+
                         <Route
                             path="change_password"
                             element={<ChangePassword />}
                         />
-                        <Route path="reviews" element={<Reviews />} />
-                        <Route path="reviews/:id" element={<EditarReview />} />
+
+                        <Route path="reviews">
+                            <Route index element={<Reviews />} />
+                            <Route path=":id" element={<EditarReview />} />
+                        </Route>
+
                         <Route path="cilindradas" element={<Cilindradas />} />
+
                         <Route path="tipos" element={<Tipos />} />
-                        <Route path="marcas" element={<MarcasCrud />} />
+
+                        <Route path="marcas">
+                            <Route index element={<MarcasCrud />} />
+                            <Route path="crear" element={<CrearMarca />} />
+                            <Route path=":id" element={<EditarMarca />} />
+                        </Route>
+
                         <Route path="motos">
                             <Route index element={<Motos />} />
                             <Route path="crear" element={<CrearMoto />} />
-                            <Route path="editar/:id" element={<EditarMoto />} />
+                            <Route path=":id" element={<EditarMoto />} />
                         </Route>
+
                         <Route path="all-reviews">
                             <Route index element={<AllReviews />} />
                             <Route path=":id" element={<ReviewSeeOneAdmin />} />
                         </Route>
-                        <Route path="ver-usuarios" element={<SeeUsers />} />
-                        <Route
-                            path="ver-usuarios/:id"
-                            element={<SeeReviesOfUsers />}
-                        />
+
+                        <Route path="ver-usuarios">
+                            <Route index element={<SeeUsers />} />
+                            <Route path=":id" element={<SeeReviesOfUsers />} />
+                        </Route>
                     </Route>
                 </Route>
                 <Route element={<RoleReq rolePermitido={"user"} />}>

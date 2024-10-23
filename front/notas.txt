@@ -1,3 +1,5 @@
 1- hacer que no invalide al crear un nuevo review en una moto, por que debe ser aceptado por el admin primero
 2- en la pagina de la ficha tecnica si ya tiene un review ya sea aprovado o pendiente, que le diga y no deje escribir otro, que aparesca una nota tipo ya hiciste tu review
 3- cambiar todo lo que es estilo por tipo
+4- tener en cuenta 320 como ancho minimo de pantall
+5- en allreviews poner tambien al usuario del review

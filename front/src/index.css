@@ -3,17 +3,24 @@
   margin: 25px auto;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: rgb(17, 26, 139);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
+}
+@media (min-width: 768px) {
+  .marcasPage h1 {
+    font-size: 2.2rem;
+  }
 }
 .marcasPage ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   max-width: 1400px;
   margin: auto;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 0 20px;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .marcasPage ul {
+    padding: 0 20px;
+  }
 }
 .marcasPage ul li {
   list-style: none;
@@ -21,43 +28,1431 @@
 }
 .marcasPage ul li a {
   display: block;
-  margin: auto;
 }
-.marcasPage ul li img {
-  margin: auto;
+.marcasPage ul li a img {
+  display: block;
   width: 100%;
   max-width: 150px;
-  display: block;
+  margin: auto;
 }
 
-header {
+.headerDashboard {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-header nav {
-  max-width: 1200px;
+.headerDashboard nav {
   display: flex;
-  justify-content: space-around;
-  margin: auto;
   align-items: center;
-  padding-bottom: 5px;
+  margin: auto;
+  justify-content: space-evenly;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav {
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+.headerDashboard nav .logo {
+  display: block;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .logo {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+  }
+}
+.headerDashboard nav .logo img {
+  width: 100%;
+  max-width: 100px;
+  min-width: 50px;
+}
+.headerDashboard nav .headerdashSelect {
+  display: flex;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .headerdashSelect {
+    width: 50%;
+  }
+}
+.headerDashboard nav .headerdashSelect select {
+  width: 50%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .headerdashSelect select {
+    width: 100%;
+  }
+  .headerDashboard nav .headerdashSelect select:nth-child(1) {
+    margin-right: 2px;
+  }
+  .headerDashboard nav .headerdashSelect select:nth-child(2) {
+    margin-left: 2px;
+  }
+}
+.headerDashboard nav .hamburgerMenu {
+  position: relative;
+  display: block;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .hamburgerMenu {
+    width: 25%;
+  }
+}
+.headerDashboard nav .hamburgerMenu .nav-burger {
+  display: none;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .hamburgerMenu .nav-burger {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+.headerDashboard nav .hamburgerMenu .nav-burger a {
+  display: block;
+  text-decoration: none;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .hamburgerMenu .nav-burger a {
+    font-size: 1.3rem;
+  }
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 35px;
+  padding: 5px;
+}
+@media (min-width: 768px) {
+  .headerDashboard nav .hamburgerMenu .hamburger-icon {
+    display: none;
+  }
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon .line {
+  border-radius: 35%;
+  width: 25px;
+  height: 4px;
+  background-color: black;
+  margin: 2.2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open .line:nth-child(1) {
+  transform: translateY(8.8px) rotate(45deg);
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open .line:nth-child(2) {
+  opacity: 0;
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open .line:nth-child(3) {
+  transform: translateY(-8.8px) rotate(-45deg);
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open ~ .nav-burger {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(68, 68, 170);
+  position: absolute;
+  right: 0;
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open ~ .nav-burger a {
+  color: white;
+  font-size: 1.2rem;
+  margin: 5px;
+  transition: 0.3s;
+  display: block;
+}
+.headerDashboard nav .hamburgerMenu .hamburger-icon.--open ~ .nav-burger a:hover {
+  text-decoration: underline;
+}
+
+.motosPorMarca h1,
+.motosPorCilindrada h1,
+.motosPorEstilo h1 {
+  width: fit-content;
+  margin: 25px auto;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  font-size: 1.8rem;
+}
+@media (min-width: 768px) {
+  .motosPorMarca h1,
+  .motosPorCilindrada h1,
+  .motosPorEstilo h1 {
+    font-size: 2.2rem;
+  }
+}
+.motosPorMarca ul,
+.motosPorCilindrada ul,
+.motosPorEstilo ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  max-width: 1400px;
+  margin: auto;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .motosPorMarca ul,
+  .motosPorCilindrada ul,
+  .motosPorEstilo ul {
+    padding: 0 20px;
+  }
+}
+.motosPorMarca ul li,
+.motosPorCilindrada ul li,
+.motosPorEstilo ul li {
+  list-style: none;
+  border: 1px solid rgba(128, 128, 128, 0.103);
+}
+.motosPorMarca ul li a,
+.motosPorCilindrada ul li a,
+.motosPorEstilo ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+}
+.motosPorMarca ul li a img,
+.motosPorCilindrada ul li a img,
+.motosPorEstilo ul li a img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.motosPorMarca ul li a h2,
+.motosPorCilindrada ul li a h2,
+.motosPorEstilo ul li a h2 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(17, 26, 139);
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio, .fichaTecnicaComponent .fichaPageTablas {
+  padding: 10px;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table, .fichaTecnicaComponent .fichaPageTablas table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+  max-width: 40rem;
+  margin: auto;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table caption, .fichaTecnicaComponent .fichaPageTablas table caption {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0.7rem;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr, .fichaTecnicaComponent .fichaPageTablas table tbody tr {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid black;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr:nth-child(odd), .fichaTecnicaComponent .fichaPageTablas table tbody tr:nth-child(odd) {
+  background-color: rgba(236, 237, 241, 0.616);
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr:nth-child(even), .fichaTecnicaComponent .fichaPageTablas table tbody tr:nth-child(even) {
+  background-color: rgba(219, 219, 219, 0.075);
+}
+@media (min-width: 768px) {
+  .ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr, .fichaTecnicaComponent .fichaPageTablas table tbody tr {
+    flex-direction: row;
+  }
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr th, .fichaTecnicaComponent .fichaPageTablas table tbody tr th {
+  text-align: left;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr th, .fichaTecnicaComponent .fichaPageTablas table tbody tr th {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+    text-align: right;
+    padding-right: 0.9rem;
+  }
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr td, .fichaTecnicaComponent .fichaPageTablas table tbody tr td {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .tabla-promedio table tbody tr td, .fichaTecnicaComponent .fichaPageTablas table tbody tr td {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .estrellas-y-promedio > div, .ficha-reviewsComponent .ficha-reviewsComponent--sin-reviews > div, .ficha-reviewsComponent .logesee-para-dejar-un-link > div {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  max-width: 30rem;
+  border-radius: 15px;
+  margin: 1.5rem auto 0.5rem auto;
+  text-align: center;
+}
+
+.fichaTecnicaComponent h1 {
+  width: fit-content;
+  margin: 25px auto;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  font-size: 1.8rem;
+}
+@media (min-width: 768px) {
+  .fichaTecnicaComponent h1 {
+    font-size: 2.2rem;
+  }
+}
+.fichaTecnicaComponent .sliderFicha {
+  width: 80vw;
+  margin: auto;
+}
+.fichaTecnicaComponent .sliderFicha img {
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: auto;
+}
+.ficha-reviewsComponent .logesee-para-dejar-un-link {
+  padding: 0 1rem;
+}
+.ficha-reviewsComponent .logesee-para-dejar-un-link > div {
+  padding-bottom: 1rem;
+}
+.ficha-reviewsComponent .logesee-para-dejar-un-link > div a {
+  text-decoration: none;
+}
+.ficha-reviewsComponent .logesee-para-dejar-un-link > div a:hover {
+  text-decoration: underline;
+}
+.ficha-reviewsComponent .ficha-reviewsComponent--sin-reviews {
+  padding: 0 1rem;
+}
+.ficha-reviewsComponent .ficha-reviewsComponent--sin-reviews > div h3 {
+  padding: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.8rem;
+  color: rgb(17, 26, 139);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.ficha-reviewsComponent .ficha-reviewsComponent--sin-reviews > div p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 0;
+  padding: 0.5rem;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .estrellas-y-promedio {
+  padding: 0 10px;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .estrellas-y-promedio > div p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .tabla-promedio-y-estrellas .estrellas-y-promedio > div .fichaPage-promedio-estrellas {
+  color: rgb(92, 100, 204);
+  font-size: 2rem;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios {
+  padding: 10px;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario {
+  max-width: 40rem;
+  margin: auto;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario h3 {
+  padding-left: 13px;
+  margin-bottom: 0.3rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo {
+  padding: 10px;
+  border: 1px solid rgba(212, 212, 212, 0.603);
+  border-radius: 10px;
+  background-color: rgba(236, 237, 241, 0.39);
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo div {
+  display: flex;
+  align-items: center;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo div p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo div .icon-thumb-up {
+  color: green;
+  margin: auto 0.4rem;
+  font-size: 1.3rem;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo div .icon-thumb-down {
+  color: red;
+  margin: auto 0.4rem;
+  font-size: 1.3rem;
+}
+.ficha-reviewsComponent .avg-puntaje-comentarios .comentarios .comentario .positivo-negativo > p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+.ficha-reviewsComponent .component-reviews-Form form {
+  display: flex;
+  flex-direction: column;
+  max-width: 35rem;
+  padding: 10px;
+  margin: auto;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra {
+  display: flex;
+  flex-direction: column;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor label,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra label {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor label .icon-thumb-up,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra label .icon-thumb-up {
+  color: green;
+  display: block;
+  position: relative;
+  top: 1px;
+  padding-right: 5px;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor label .icon-thumb-down,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra label .icon-thumb-down {
+  color: red;
+  display: block;
+  position: relative;
+  top: 1px;
+  padding-right: 5px;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor textarea,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra textarea {
+  height: 5rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-a-favor p,
+.ficha-reviewsComponent .component-reviews-Form form .review-aspecto-en-contra p {
+  color: red;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones {
+  margin-top: 1rem;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones h3 {
+  text-align: center;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review {
+  border: 1px solid rgb(216, 216, 216);
+  padding: 0.5rem;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review label {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review div {
+  display: flex;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review div input {
+  width: 100%;
+}
+.ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review div .reviews-form-puntaje {
+  margin: 0.4rem;
+  font-size: 1.3rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ficha-reviewsComponent .component-reviews-Form form .ficha-review-form-boton-enviar {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  width: 35%;
+  margin: auto;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+  padding: 0.4rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid grey;
+}
+
+.login-page,
+.register-page {
+  padding: 10px;
+  padding-top: 18vh;
+}
+.login-page .contenedor,
+.register-page .contenedor {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 1.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.login-page .contenedor h1,
+.register-page .contenedor h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.login-page .contenedor form,
+.register-page .contenedor form {
+  display: flex;
+  flex-direction: column;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.login-page .contenedor form div,
+.register-page .contenedor form div {
+  display: flex;
+  flex-direction: column;
+  margin: 0.4rem 0;
+}
+.login-page .contenedor form div label,
+.register-page .contenedor form div label {
+  margin-bottom: 0.2rem;
+}
+.login-page .contenedor form button,
+.register-page .contenedor form button {
+  margin: auto;
+  margin-top: 0.8rem;
+  padding: 0.1rem 0.8rem;
+  padding-bottom: 0.25rem;
+}
+
+.mis-datos-page {
+  padding: 10px;
+}
+.mis-datos-page .contenedor {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 1.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.mis-datos-page .contenedor h1 {
+  text-align: center;
+  color: rgb(17, 26, 139);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.mis-datos-page .contenedor div h2 {
+  font-size: 1.3rem;
+  color: rgb(92, 100, 204);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-bottom: 0;
+}
+.mis-datos-page .contenedor div p {
+  margin-top: 0.2rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.mis-datos-page .contenedor a {
+  display: block;
+  margin: auto;
+  text-decoration: none;
+  color: rgb(92, 100, 204);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: fit-content;
+  font-size: 1.3rem;
+}
+.mis-datos-page .contenedor a:hover {
+  text-decoration: underline;
+}
+
+.tipos-page .form, .crear-cilindrada-page .form-crear-cilindrada, .change-password-page {
+  padding: 10px;
+}
+.tipos-page .form .contenedor, .crear-cilindrada-page .form-crear-cilindrada .contenedor, .change-password-page .contenedor {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 1.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.tipos-page .form .contenedor h1, .crear-cilindrada-page .form-crear-cilindrada .contenedor h1, .change-password-page .contenedor h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.tipos-page .form .contenedor form, .crear-cilindrada-page .form-crear-cilindrada .contenedor form, .change-password-page .contenedor form {
+  display: flex;
+  flex-direction: column;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.tipos-page .form .contenedor form div, .crear-cilindrada-page .form-crear-cilindrada .contenedor form div, .change-password-page .contenedor form div {
+  display: flex;
+  flex-direction: column;
+  margin: 0.4rem 0;
+}
+.tipos-page .form .contenedor form div label, .crear-cilindrada-page .form-crear-cilindrada .contenedor form div label, .change-password-page .contenedor form div label {
+  margin-bottom: 0.2rem;
+}
+.tipos-page .form .contenedor form button, .crear-cilindrada-page .form-crear-cilindrada .contenedor form button, .change-password-page .contenedor form button {
+  margin: auto;
+  margin-top: 0.8rem;
+  padding: 0.1rem 0.8rem;
+  padding-bottom: 0.25rem;
+}
+
+.change-password-page .contenedor form .boton button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.change-password-page .contenedor form .boton button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.crear-cilindrada-page .form-crear-cilindrada .contenedor form button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-cilindrada-page .form-crear-cilindrada .contenedor form button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.crear-cilindrada-page .ver-editar-cilindradas {
+  padding: 10px;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  border-radius: 5px;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .input-box {
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .input-box label {
+  width: 30%;
+  text-align: right;
+  padding-right: 0.4rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .input-box input {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  width: 70%;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .botones {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 0.2rem;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .formulario form .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  border-radius: 5px;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .valores {
+  display: flex;
+  align-items: center;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .valores p {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .valores p:nth-child(1) {
+  width: 30%;
+  text-align: right;
+  padding-right: 0.4rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .valores p:nth-child(2) {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .botones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin-top: 0.2rem;
+}
+.crear-cilindrada-page .ver-editar-cilindradas .casilla .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.tipos-page .form .contenedor form button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.tipos-page .form .contenedor form button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.tipos-page .casillas {
+  padding: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.tipos-page .casillas .casilla-form {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.tipos-page .casillas .casilla-form form .valores-input {
+  display: flex;
+  align-items: center;
+}
+.tipos-page .casillas .casilla-form form .valores-input label {
+  width: 30%;
+  text-align: right;
+  padding-right: 5px;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+}
+.tipos-page .casillas .casilla-form form .botones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.tipos-page .casillas .casilla-form form .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 6px 12px;
+  margin-top: 10px;
+}
+.tipos-page .casillas .casilla-form form .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.tipos-page .casillas .casilla-dato {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.tipos-page .casillas .casilla-dato .valor {
+  display: flex;
+  align-items: center;
+}
+.tipos-page .casillas .casilla-dato .valor p:nth-child(1) {
+  width: 30%;
+  text-align: right;
+  padding-right: 5px;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+}
+.tipos-page .casillas .casilla-dato .botones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.tipos-page .casillas .casilla-dato .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 7px 20px;
+}
+.tipos-page .casillas .casilla-dato .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.signed-review-page {
+  padding: 10px;
+}
+.signed-review-page h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  text-align: center;
+}
+.signed-review-page .casillas {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  max-width: 40rem;
+}
+.signed-review-page .casillas .valores {
+  display: flex;
+  align-items: center;
+}
+.signed-review-page .casillas .valores h2 {
+  width: 30%;
+  font-size: 1rem;
+  text-align: right;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
   margin-top: 5px;
   margin-bottom: 5px;
 }
-header .imgLogo {
+.signed-review-page .casillas .valores span {
+  margin-right: 5px;
+}
+.signed-review-page .casillas .valores p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.signed-review-page .casillas .botones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.signed-review-page .casillas .botones button {
   display: block;
-  width: 100%;
-  max-width: 150px;
-  min-width: 100px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 8px 16px;
+}
+.signed-review-page .casillas .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
 }
 
-.motosMarca {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 50px;
+.signed-review-edit-single {
+  padding: 10px;
 }
-.motosMarca img {
+.signed-review-edit-single .contenedor {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  max-width: 40rem;
+}
+.signed-review-edit-single .contenedor h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.signed-review-edit-single .contenedor form .valor-texto {
+  display: flex;
+  flex-direction: column;
+  margin: 14px auto;
+}
+.signed-review-edit-single .contenedor form .valor-texto label {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-bottom: 7px;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+  margin-top: 0;
+}
+.signed-review-edit-single .contenedor form .valor-texto textarea {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.signed-review-edit-single .contenedor form .valor-texto p {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.signed-review-edit-single .contenedor form .valor-range {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+}
+.signed-review-edit-single .contenedor form .valor-range label {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.signed-review-edit-single .contenedor form .valor-range div {
+  display: flex;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  align-items: center;
+}
+.signed-review-edit-single .contenedor form .valor-range div input {
+  width: 90%;
+}
+.signed-review-edit-single .contenedor form .valor-range div p {
+  padding: 2px;
+  margin: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+}
+.signed-review-edit-single .contenedor form .botones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.signed-review-edit-single .contenedor form .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 7px 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.signed-review-edit-single .contenedor form .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.crear-moto-form-page form .moto-box .imagen-box, .contenedor-form form .imagen-box {
+  width: fit-content;
+  margin: auto;
+}
+.crear-moto-form-page form .moto-box .imagen-box .imagen, .contenedor-form form .imagen-box .imagen {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.crear-moto-form-page form .moto-box .imagen-box .imagen img, .contenedor-form form .imagen-box .imagen img {
+  display: block;
   width: 100%;
-  max-width: 200px;
+}
+.crear-moto-form-page form .moto-box .imagen-box .imagen p, .contenedor-form form .imagen-box .imagen p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .moto-box .imagen-box > p, .contenedor-form form .imagen-box > p {
+  color: red;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.crear-moto-form-page form .moto-box .imagen-box input[type=file], .contenedor-form form .imagen-box input[type=file] {
+  display: none;
+}
+.crear-moto-form-page form .moto-box .imagen-box .botones, .contenedor-form form .imagen-box .botones {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 0.8rem auto 1rem auto;
+}
+.crear-moto-form-page form .moto-box .imagen-box .botones button, .contenedor-form form .imagen-box .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 0.3rem 0.7rem;
+}
+.crear-moto-form-page form .moto-box .imagen-box .botones button:hover, .contenedor-form form .imagen-box .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.contenedor-form {
+  padding: 10px;
+}
+.contenedor-form h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.contenedor-form form {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+}
+.contenedor-form form .casilla-input {
+  display: flex;
+  flex-direction: column;
+}
+.contenedor-form form .casilla-input label {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-bottom: 0.2rem;
+}
+.contenedor-form form .casilla-input input {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.contenedor-form form .casilla-input p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: red;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.contenedor-form form .boton-crear button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 0.3rem 0.7rem;
+  margin: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding-bottom: 0.4rem;
+  margin-top: 0.7rem;
+}
+.contenedor-form form .boton-crear button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.marcas-crud-page h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+  color: rgb(17, 26, 139);
+}
+.marcas-crud-page > button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: auto;
+}
+.marcas-crud-page > button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.marcas-crud-page .contenedor-grid {
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 35px;
+}
+@media (min-width: 768px) {
+  .marcas-crud-page .contenedor-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+.marcas-crud-page .contenedor-grid .casilla-val {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(128, 128, 128, 0.144);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.marcas-crud-page .contenedor-grid .casilla-val img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.marcas-crud-page .contenedor-grid .casilla-val .botones {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+.marcas-crud-page .contenedor-grid .casilla-val .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 5px 10px;
+}
+.marcas-crud-page .contenedor-grid .casilla-val .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.ver-y-editar-motos-page h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.ver-y-editar-motos-page .crear-select {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.ver-y-editar-motos-page .crear-select button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 7px 14px;
+}
+.ver-y-editar-motos-page .crear-select button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.ver-y-editar-motos-page .crear-select select {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 7px 14px;
+}
+.ver-y-editar-motos-page .crear-select select:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.ver-y-editar-motos-page .casilla-sin-marca {
+  padding: 10px;
+}
+.ver-y-editar-motos-page .casilla-sin-marca h2 {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.ver-y-editar-motos-page .contenedor {
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  max-width: 1200px;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .ver-y-editar-motos-page .contenedor {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+.ver-y-editar-motos-page .contenedor .casilla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(128, 128, 128, 0.144);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ver-y-editar-motos-page .contenedor .casilla img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.ver-y-editar-motos-page .contenedor .casilla .botones {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+.ver-y-editar-motos-page .contenedor .casilla .botones button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 5px 10px;
+}
+.ver-y-editar-motos-page .contenedor .casilla .botones button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.crear-moto-form-page {
+  padding: 10px;
+}
+.crear-moto-form-page h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+}
+.crear-moto-form-page form {
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0.5rem auto 0.5rem auto;
+  max-width: 25rem;
+  max-width: 55rem;
+}
+.crear-moto-form-page form .moto-box {
+  margin-bottom: 1.5asdrem;
+}
+.crear-moto-form-page form .moto-box h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  margin: 1rem 0 0.6rem 0;
+  text-align: center;
+}
+.crear-moto-form-page form .moto-box .label-input-err {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  max-width: 20rem;
+  width: 100%;
+  margin: auto;
+}
+.crear-moto-form-page form .moto-box .label-input-err label {
+  color: rgb(92, 100, 204);
+  font-weight: 700;
+  width: fit-content;
+}
+.crear-moto-form-page form .moto-box .label-input-err input {
+  border-radius: 5px;
+  border: 1px solid gray;
+  text-indent: 0.3rem;
+}
+.crear-moto-form-page form .moto-box .label-input-err p {
+  margin: 0;
+  color: red;
+}
+.crear-moto-form-page form .imagenes-de-ficha h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  margin: 1rem 0 0.6rem 0;
+  text-align: center;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs .contenedor-imgs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  border: 1px solid rgba(128, 128, 128, 0.637);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+  align-content: center;
+  border-radius: 10px;
+  min-width: 70%;
+  min-height: 200px;
+  gap: 10px;
+  padding: 10px;
+}
+@media (min-width: 768px) {
+  .crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs .contenedor-imgs {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs .contenedor-imgs div {
+  position: relative;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs .contenedor-imgs div .delete-icon {
+  cursor: pointer;
+  color: red;
+  position: absolute;
+  right: 0;
+  font-size: 40px;
+  padding: 0;
+  margin: 0;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs .contenedor-imgs div img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs p {
+  color: red;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs input[type=file] {
+  display: none;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: auto;
+  margin-top: 15px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.crear-moto-form-page form .select-div {
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .crear-moto-form-page form .select-div {
+    display: flex;
+    gap: 1.5rem;
+  }
+}
+.crear-moto-form-page form .select-div div {
+  margin-bottom: 1.3rem;
+}
+@media (min-width: 768px) {
+  .crear-moto-form-page form .select-div div {
+    width: 100%;
+  }
+}
+.crear-moto-form-page form .select-div div h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  margin: 1rem 0 0.6rem 0;
+}
+.crear-moto-form-page form .select-div div select {
+  width: 100%;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 0.6rem 1.5rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .select-div div select:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.crear-moto-form-page form .select-div div p {
+  color: red;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0.2rem;
+}
+.crear-moto-form-page form .mecanica,
+.crear-moto-form-page form .configuracion {
+  margin-bottom: 1.7rem;
+}
+.crear-moto-form-page form .mecanica h2,
+.crear-moto-form-page form .configuracion h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  margin: 1rem 0 0.6rem 0;
+}
+.crear-moto-form-page form .mecanica .contenedor,
+.crear-moto-form-page form .configuracion .contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+@media (min-width: 768px) {
+  .crear-moto-form-page form .mecanica .contenedor,
+  .crear-moto-form-page form .configuracion .contenedor {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.crear-moto-form-page form .mecanica .contenedor .casilla,
+.crear-moto-form-page form .configuracion .contenedor .casilla {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .mecanica .contenedor .casilla label,
+.crear-moto-form-page form .configuracion .contenedor .casilla label {
+  color: rgb(92, 100, 204);
+  font-weight: 700;
+  width: fit-content;
+}
+.crear-moto-form-page form .mecanica .contenedor .casilla input,
+.crear-moto-form-page form .mecanica .contenedor .casilla textarea,
+.crear-moto-form-page form .configuracion .contenedor .casilla input,
+.crear-moto-form-page form .configuracion .contenedor .casilla textarea {
+  border-radius: 5px;
+  border: 1px solid gray;
+  text-indent: 0.3rem;
+}
+.crear-moto-form-page form .mecanica .contenedor .casilla p,
+.crear-moto-form-page form .configuracion .contenedor .casilla p {
+  margin: 0;
+  color: red;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .crear-moto-form-page form .mecanica .contenedor .casilla,
+  .crear-moto-form-page form .configuracion .contenedor .casilla {
+    grid-template-columns: 1fr;
+  }
+}
+.crear-moto-form-page form .boton button {
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.crear-moto-form-page form .boton button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
 }
 
 /*# sourceMappingURL=index.css.map */

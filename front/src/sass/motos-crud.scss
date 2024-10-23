@@ -1,0 +1,230 @@
+@use "variables" as v;
+@use "mixin" as m;
+@use "_imagen-box-extend";
+// CrearMoto.jsx y EditarMoto.jsx
+
+.crear-moto-form-page {
+    padding: 10px;
+
+    h1 {
+        text-align: center;
+        font-family: v.$fuente-primaria;
+        color: v.$color-azul-font;
+    }
+
+    form {
+        @include m.casilla;
+        max-width: 55rem;
+
+        .moto-box {
+            margin-bottom: 1.5asdrem;
+            h2 {
+                font-family: v.$fuente-primaria;
+                color: v.$color-azul-font;
+                margin: 1rem 0 0.6rem 0;
+                text-align: center;
+            }
+
+            .imagen-box {
+                @extend %imagen-box;
+            }
+
+            .label-input-err {
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+                margin-bottom: 0.5rem;
+                font-family: v.$fuente-secundaria;
+                max-width: 20rem;
+                width: 100%;
+                margin: auto;
+
+                label {
+                    color: v.$color-celeste-font;
+                    font-weight: 700;
+                    width: fit-content;
+                }
+
+                input {
+                    border-radius: 5px;
+                    border: 1px solid gray;
+                    text-indent: 0.3rem;
+                }
+
+                p {
+                    margin: 0;
+                    color: red;
+                }
+            }
+        }
+        .imagenes-de-ficha {
+            h2 {
+                font-family: v.$fuente-primaria;
+                color: v.$color-azul-font;
+                margin: 1rem 0 0.6rem 0;
+                text-align: center;
+            }
+            .componente-muchas-imgs {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+
+                .contenedor-imgs {
+                    display: grid;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(180px, 1fr)
+                    );
+                    border: 1px solid rgba(128, 128, 128, 0.637);
+                    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+                    align-content: center;
+                    border-radius: 10px;
+                    min-width: 70%;
+                    min-height: 200px;
+                    gap: 10px;
+                    padding: 10px;
+
+                    @media (min-width: v.$breakpoint-tablet) {
+                        grid-template-columns: repeat(
+                            auto-fill,
+                            minmax(200px, 1fr)
+                        );
+                    }
+                    div {
+                        position: relative;
+                        .delete-icon {
+                            cursor: pointer;
+                            color: red;
+                            position: absolute;
+                            right: 0;
+                            font-size: 40px;
+                            // border: 1px solid red;
+                            padding: 0;
+                            margin: 0;
+                            
+                        }
+
+                        img {
+                            display: block;
+                            // max-width: 200px;
+                            // max-width: 80%;
+                            width: 100%;
+                            margin: auto;
+                        }
+                    }
+                }
+                p {
+                    color: red;
+                    font-family: v.$fuente-secundaria;
+                }
+
+                input[type="file"] {
+                    display: none;
+                }
+
+                button {
+                    @include m.boton;
+                    margin: auto;
+                    margin-top: 15px;
+                    font-family: v.$fuente-secundaria;
+                }
+            }
+        }
+
+        .select-div {
+            margin-bottom: 2rem;
+
+            @media (min-width: v.$breakpoint-tablet) {
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            div {
+                margin-bottom: 1.3rem;
+
+                @media (min-width: v.$breakpoint-tablet) {
+                    width: 100%;
+                }
+
+                h2 {
+                    font-family: v.$fuente-primaria;
+                    color: v.$color-azul-font;
+                    margin: 1rem 0 0.6rem 0;
+                }
+                select {
+                    width: 100%;
+                    @include m.boton;
+                    padding: 0.6rem 1.5rem;
+                    font-family: v.$fuente-secundaria;
+                }
+                p {
+                    color: red;
+                    font-family: v.$fuente-secundaria;
+                    margin: 0.2rem;
+                }
+            }
+        }
+
+        .mecanica,
+        .configuracion {
+            margin-bottom: 1.7rem;
+            h2 {
+                font-family: v.$fuente-primaria;
+                color: v.$color-azul-font;
+                margin: 1rem 0 0.6rem 0;
+            }
+
+            .contenedor {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+                // border: 1px solid red;
+                // padding-bottom: 3rem;
+
+                @media (min-width: v.$breakpoint-tablet) {
+                    grid-template-columns: 1fr 1fr;
+                    // gap: 0;
+                }
+
+                .casilla {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.3rem;
+                    margin-bottom: 0.5rem;
+                    font-family: v.$fuente-secundaria;
+
+                    label {
+                        color: v.$color-celeste-font;
+                        font-weight: 700;
+                        width: fit-content;
+                    }
+
+                    input,
+                    textarea {
+                        border-radius: 5px;
+                        border: 1px solid gray;
+                        text-indent: 0.3rem;
+                    }
+
+                    p {
+                        margin: 0;
+                        color: red;
+                        font-family: v.$fuente-secundaria;
+                    }
+
+                    @media (min-width: v.$breakpoint-tablet) {
+                        grid-template-columns: 1fr;
+                        // gap: 10px;
+                    }
+                }
+            }
+        }
+
+        .boton {
+            button {
+                @include m.boton;
+                margin: auto;
+                font-family: v.$fuente-secundaria;
+            }
+        }
+    }
+}

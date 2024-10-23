@@ -44,24 +44,25 @@ export default function Dashboard() {
 
     return (
         <div>
-            <header>
+            <header className="headerDashboard">
                 <nav>
                     <NavLink
+                        className={"logo"}
                         to={"/"}
                         onClick={handleLogoClick}
-                        className={"logo"}
                     >
-                        <img src={logo} className="imgLogo" alt="logo" />
+                        <img src={logo} alt="logo" />
                     </NavLink>
-                    <div>
+                    <div className="headerdashSelect">
                         <select
+                            className="filtroSelect"
                             value={selectCarac}
                             onChange={handleChangeCarac}
                         >
                             <option
                                 value={JSON.stringify({ grupo: "", valor: "" })}
                             >
-                                elegir filtro
+                                filtro
                             </option>
                             <optgroup label="cilindrada">
                                 {datos.cilindradas.map((v) => {
@@ -112,8 +113,14 @@ export default function Dashboard() {
                                 })}
                             </optgroup>
                         </select>
-                        <select value={selectMoto} onChange={handleChangeMoto}>
-                            <option value="">seleccione una moto</option>
+                        <select
+                            className="motoSelect"
+                            value={selectMoto}
+                            onChange={handleChangeMoto}
+                        >
+                            <option value="" disabled>
+                                moto
+                            </option>
                             {listaOpcionesMotos.map((v) => {
                                 return (
                                     <option key={v._id} value={v.nombre}>

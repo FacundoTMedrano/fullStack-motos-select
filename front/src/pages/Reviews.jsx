@@ -45,23 +45,59 @@ export default function Reviews() {
         return <div>sin reviews para mostrar</div>;
     }
 
-    return reviews.data.map((v) => {
-        return (
-            <div
-                key={v._id}
-                style={{ border: "1px solid black", margin: "5px" }}
-            >
-                <p>{v.opinionNegativa}</p>
-                <p>{v.opinionPositiva}</p>
-                <p>{v.moto.nombre}</p>
-                <p>{v.moto.marca.marca}</p>
-                <button onClick={() => eliminarReview.mutate(v._id)}>
-                    borrar
-                </button>
-                <button onClick={() => navi(`/${role}/reviews/${v._id}`)}>
-                    editar
-                </button>
-            </div>
-        );
-    });
+    return (
+        <div className="signed-review-page">
+            <h1>Mis Reviews</h1>
+            {reviews.data.length === 0 ? (
+                <div className="sin-reviews">
+                    <h1>sin reviews para mostrar</h1>
+                </div>
+            ) : (
+                <div className="casillas">
+                    {reviews.data.map((v) => {
+                        return (
+                            <div key={v._id} className="casilla">
+                                <div className="valores">
+                                    <h2>Opinion negativa</h2>
+                                    <span>:</span>
+                                    <p>{v.opinionNegativa}</p>
+                                </div>
+                                <div className="valores">
+                                    <h2>Opinion positiva</h2>
+                                    <span>:</span>
+                                    <p>{v.opinionPositiva}</p>
+                                </div>
+                                <div className="valores">
+                                    <h2>Nombre de moto</h2>
+                                    <span>:</span>
+                                    <p>{v.moto.nombre}</p>
+                                </div>
+                                <div className="valores">
+                                    <h2>Nombre de marca</h2>
+                                    <span>:</span>
+                                    <p>{v.moto.marca.marca}</p>
+                                </div>
+                                <div className="botones">
+                                    <button
+                                        onClick={() =>
+                                            eliminarReview.mutate(v._id)
+                                        }
+                                    >
+                                        borrar
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            navi(`/${role}/reviews/${v._id}`)
+                                        }
+                                    >
+                                        editar
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
 }

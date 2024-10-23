@@ -1,0 +1,49 @@
+@use "variables" as v;
+// MisDatos.jsx
+
+.mis-datos-page {
+    padding: 10px;
+
+    .contenedor {
+        border: 1px solid rgba(128, 128, 128, 0.637);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 1.5rem auto 0.5rem auto;
+        max-width: 25rem;
+
+        h1 {
+            text-align: center;
+            color: v.$color-azul-font;
+            font-family: v.$fuente-primaria;
+        }
+
+        div {
+            h2 {
+                font-size: 1.3rem;
+                color: v.$color-celeste-font;
+                font-family: v.$fuente-primaria;
+                margin-bottom: 0;
+            }
+
+            p {
+                margin-top: .2rem;
+                font-family: v.$fuente-secundaria;
+            }
+        }
+
+        a{
+            display: block;
+            margin: auto;
+            text-decoration: none;
+            color: v.$color-celeste-font;
+            font-family: v.$fuente-primaria;
+            width: fit-content;
+            font-size: 1.3rem;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}

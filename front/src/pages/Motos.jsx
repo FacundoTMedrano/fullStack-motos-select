@@ -56,39 +56,50 @@ export default function Motos() {
     }
 
     return (
-        <div>
-            <button onClick={() => navigate("crear")}>crear moto</button>
-            <select onChange={(e) => setSelectMarca(e.target.value)}>
-                <option value="">selecciona una marca</option>
-                {marcas.data.map((v) => {
+        <div className="ver-y-editar-motos-page">
+            <h1>Ver y Editar Motos</h1>
+            <div className="crear-select">
+                <button onClick={() => navigate("crear")}>crear moto</button>
+                <select onChange={(e) => setSelectMarca(e.target.value)}>
+                    <option value="">selecciona una marca</option>
+                    {marcas.data.map((v) => {
+                        return (
+                            <option key={v._id} value={v._id}>
+                                {v.marca}
+                            </option>
+                        );
+                    })}
+                </select>
+            </div>
+            {selectMarca === "" && (
+                <div className="casilla-sin-marca">
+                    <h2>Selecciona una marca para poder verla</h2>
+                </div>
+            )}
+
+            <div className="contenedor">
+                {motosFiltradas.map((v) => {
+                    const imgBig = `${base}/imgs/big/${v.img}`;
+                    const imgMedium = `${base}/imgs/medium/${v.img}`;
                     return (
-                        <option key={v._id} value={v._id}>
-                            {v.marca}
-                        </option>
+                        <div className="casilla" key={v._id}>
+                            <img
+                                src={imgBig}
+                                srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                            />
+                            <p>{v.nombre}</p>
+                            <div className="botones">
+                                <button onClick={() => navigate(v._id)}>
+                                    editar
+                                </button>
+                                <button onClick={() => eliminar.mutate(v._id)}>
+                                    delete
+                                </button>
+                            </div>
+                        </div>
                     );
                 })}
-            </select>
-            {selectMarca === "" && <p>no hay marca seleccionada</p>}
-            {motosFiltradas.map((v) => {
-                const imgBig = `${base}/imgs/big/${v.img}`;
-                const imgMedium = `${base}/imgs/medium/${v.img}`;
-                return (
-                    <div key={v._id}>
-                        <img
-                            src={imgBig}
-                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
-                            style={{ width: "250px" }}
-                        />
-                        <p>{v.nombre}</p>
-                        <button onClick={() => navigate(`editar/${v._id}`)}>
-                            editar
-                        </button>
-                        <button onClick={() => eliminar.mutate(v._id)}>
-                            delete
-                        </button>
-                    </div>
-                );
-            })}
+            </div>
         </div>
     );
 }

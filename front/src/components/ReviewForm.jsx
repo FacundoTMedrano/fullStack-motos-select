@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import zodSchema from "../schemas/reviewForm.js";
-import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+// import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types";
-import { Fragment } from "react";
 import reviewFormDefaultVal from "../constants/reviewFormDefaultVal.js";
 import keys from "../constants/keysReviewForm.js";
+import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa6";
+import espaciado from "../utils/espaciado.js";
 
 export default function ReviewForm({ moto }) {
     const axiosPrivate = useAxiosPrivate();
@@ -22,18 +24,18 @@ export default function ReviewForm({ moto }) {
         resolver: zodResolver(zodSchema),
     });
 
-    const miReview = useQuery({
-        queryKey: ["reviews", "mi_review", moto._id],
-        queryFn: async () => {
-            const { data } = await axiosPrivate(
-                `reviews/review-from-moto/${moto._id}`
-            );
-            console.log(data);
-            return data;
-        },
-        retry: 1,
-        refetchOnWindowFocus: false,
-    });
+    // const miReview = useQuery({
+    //     queryKey: ["reviews", "mi_review", moto._id],
+    //     queryFn: async () => {
+    //         const { data } = await axiosPrivate(
+    //             `reviews/review-from-moto/${moto._id}`
+    //         );
+    //         console.log(data);
+    //         return data;
+    //     },
+    //     retry: 1,
+    //     refetchOnWindowFocus: false,
+    // });
 
     const enviarForm = useMutation({
         mutationFn: async (datos) => {
@@ -61,43 +63,79 @@ export default function ReviewForm({ moto }) {
     //si retorna un error quiere decir que no tiene review, estoy pidiendo mi review en base a mi token
     // creo que deberia ser distinto
 
-    if (miReview.isSuccess) {
-        return <div>ya tiene un review</div>;
-    }
+    // if (miReview.isSuccess) {
+    //     return (
+    //         <div>
+    //             <h3>Ya realizaste tu review</h3>
+    //             <p>Debes esperar a que sea aceptado</p>
+    //         </div>
+    //     );
+    // }
 
     return (
-        <form
-            onSubmit={handleSubmit(enviarForm.mutate)}
-            style={{ display: "flex", flexDirection: "column" }}
-        >
-            <input type="text" {...register("opinionPositiva")} />
-            {errors?.opinionPositiva?.message && (
-                <p>{errors.opinionPositiva.message}</p>
-            )}
-            <input type="text" {...register("opinionNegativa")} />
-            {errors?.opinionNegativa?.message && (
-                <p>{errors.opinionNegativa.message}</p>
-            )}
-            {keys.map((v) => {
-                return (
-                    <Fragment key={v}>
-                        <input
-                            type="range"
-                            max={10}
-                            min={0}
-                            {...register(v, {
-                                valueAsNumber: true,
-                            })}
-                        />
-                        <p>{watch(v)}</p>
-                        {errors?.[v] && <p>{errors[v].message}</p>}
-                    </Fragment>
-                );
-            })}
-            <button disabled={enviarForm.isPending || enviarForm.isSuccess}>
-                enviar
-            </button>
-        </form>
+        <div className="component-reviews-Form">
+            <form onSubmit={handleSubmit(enviarForm.mutate)}>
+                <div className="review-aspecto-a-favor">
+                    <label htmlFor="opinionPositiva">
+                        <FaRegThumbsUp className="icon-thumb-up" />
+                        aspecto a favor
+                    </label>
+                    <textarea
+                        id="opinionPositiva"
+                        rows={4}
+                        {...register("opinionPositiva")}
+                    />
+                    {errors?.opinionPositiva?.message && (
+                        <p>{errors.opinionPositiva.message}</p>
+                    )}
+                </div>
+                <div className="review-aspecto-en-contra">
+                    <label htmlFor="opinionNegativa">
+                        <FaRegThumbsDown className="icon-thumb-down" />
+                        aspecto en contra
+                    </label>
+                    <textarea
+                        id="opinionNegativa"
+                        rows={4}
+                        {...register("opinionNegativa")}
+                    />
+                    {errors?.opinionNegativa?.message && (
+                        <p>{errors.opinionNegativa.message}</p>
+                    )}
+                </div>
+                <div className="review-calificaciones">
+                    <h3>Calificacion del 1 al 10</h3>
+                    {keys.map((v) => {
+                        return (
+                            <div className="form-range-review" key={v}>
+                                <label htmlFor={v}>{espaciado(v)}</label>
+                                <div>
+                                    <input
+                                        id={v}
+                                        type="range"
+                                        max={10}
+                                        min={0}
+                                        {...register(v, {
+                                            valueAsNumber: true,
+                                        })}
+                                    />
+                                    <span className="reviews-form-puntaje">
+                                        {watch(v)}
+                                    </span>
+                                </div>
+                                {errors?.[v] && <p>{errors[v].message}</p>}
+                            </div>
+                        );
+                    })}
+                </div>
+                <button
+                    className="ficha-review-form-boton-enviar"
+                    disabled={enviarForm.isPending || enviarForm.isSuccess}
+                >
+                    enviar
+                </button>
+            </form>
+        </div>
     );
 }
 

@@ -16,6 +16,15 @@ export default function FichaTecnica({ moto }) {
         refetchOnWindowFocus: false,
     });
 
+    const marca = useQuery({
+        queryKey: ["marcas"],
+        queryFn: async () => {
+            const { data } = await axiosPublic(`marcas`);
+            return data;
+        },
+        refetchOnWindowFocus: false,
+    });
+
     const settings = {
         infinite: true,
         speed: 500,
@@ -33,67 +42,75 @@ export default function FichaTecnica({ moto }) {
         return <div>error en el fetch</div>;
     }
 
-    console.log(ficha.data);
-
     if (ficha.data.imagenes.length === 1) {
         ficha.data.imagenes[1] = ficha.data.imagenes[0];
     }
+    const marcaDeLaMoto = marca.data.find((marca) => marca._id === moto.marca);
 
     return (
-        <div>
-            <Slider {...settings}>
-                {ficha.data.imagenes.map((v) => {
-                    return (
-                        <div key={v}>
-                            <img
-                                style={{ width: "300px" }}
-                                src={`${base}/imgs/big/${v}`}
-                            />
-                        </div>
-                    );
-                })}
-            </Slider>
-            <table>
-                <tbody>
-                    {Object.entries(ficha.data.mecanica).map(([key, value]) => {
+        <div className="fichaTecnicaComponent">
+            <h1>
+                {marcaDeLaMoto.marca} {moto.nombre}
+            </h1>
+            <div className="sliderFicha">
+                <Slider {...settings}>
+                    {ficha.data.imagenes.map((v) => {
                         return (
-                            <tr key={key}>
-                                <th>{key}</th>
-                                <td>{value}</td>
-                            </tr>
+                            <div key={v}>
+                                <img src={`${base}/imgs/big/${v}`} />
+                            </div>
                         );
                     })}
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    {Object.entries(ficha.data.configuracion).map(
-                        ([key, value]) => {
-                            if (value.length === 0) return null;
-                            let val = value;
-                            if (Array.isArray(value)) {
-                                val = (
-                                    <ul>
-                                        {value.map((v) => {
-                                            return (
-                                                <li key={v.slice(0, 10)}>
-                                                    {v}
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
+                </Slider>
+            </div>
+            <div className="fichaPageTablas">
+                <table>
+                    <caption>Mecanica</caption>
+                    <tbody>
+                        {Object.entries(ficha.data.mecanica).map(
+                            ([key, value]) => {
+                                return (
+                                    <tr key={key}>
+                                        <th>{key}</th>
+                                        <td>{value}</td>
+                                    </tr>
                                 );
                             }
-                            return (
-                                <tr key={key}>
-                                    <th>{key}</th>
-                                    <td>{val}</td>
-                                </tr>
-                            );
-                        }
-                    )}
-                </tbody>
-            </table>
+                        )}
+                    </tbody>
+                </table>
+
+                <table>
+                    <caption>Configuracion</caption>
+                    <tbody>
+                        {Object.entries(ficha.data.configuracion).map(
+                            ([key, value]) => {
+                                if (value.length === 0) return null;
+                                let val = value;
+                                if (Array.isArray(value)) {
+                                    val = (
+                                        <ul>
+                                            {value.map((v) => {
+                                                return (
+                                                    <li key={v.slice(0, 10)}>
+                                                        {v}
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    );
+                                }
+                                return (
+                                    <tr key={key}>
+                                        <th>{key}</th>
+                                        <td>{val}</td>
+                                    </tr>
+                                );
+                            }
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

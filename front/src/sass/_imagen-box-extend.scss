@@ -1,0 +1,50 @@
+@use "variables" as v;
+@use "mixin" as m;
+// el box con imagen de crear marca esta hecho con esto
+
+%imagen-box {
+    width: fit-content;
+    margin: auto;
+
+    .imagen {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        border: 1px solid rgba(128, 128, 128, 0.637);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        p {
+            font-family: v.$fuente-secundaria;
+        }
+    }
+    > p {
+        color: red;
+        font-family: v.$fuente-secundaria;
+        text-align: center;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+    
+    .botones {
+        font-family: v.$fuente-secundaria;
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        margin: 0.8rem auto 1rem auto;
+
+        button {
+            @include m.boton;
+            padding: 0.3rem 0.7rem;
+        }
+    }
+}

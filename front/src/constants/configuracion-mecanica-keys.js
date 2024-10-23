@@ -1,0 +1,163 @@
+export const configuracion = [
+    {
+        tipo: "text",
+        value: "Faro Delantero",
+        validaciones: {},
+        placeholder: "",
+    },
+    { tipo: "text", value: "Llantas", validaciones: {}, placeholder: "" },
+    {
+        tipo: "text",
+        value: "Frenos D / T",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Neumático Delantero",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Neumático Trasero",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Suspensión Delantera",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Suspensión Trasera",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Largo / Ancho / Alto",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Distancia entre Ejes",
+        validaciones: {},
+        placeholder: "",
+    },
+    { tipo: "text", value: "Peso", validaciones: {}, placeholder: "" },
+    {
+        tipo: "text",
+        value: "Capacidad de Carga",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Capacidad del Tanque",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Consumo y Autonomía",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Puerto USB",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Altura del Asiento",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Tipo de Batería",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Cantidad de Baterías",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Tiempo de Carga",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "textarea",
+        value: "Equipamiento",
+        validaciones: {},
+        placeholder: "Debe dejar sus valores separados por | ",
+    },
+];
+
+export const mecanica = [
+    {
+        tipo: "text",
+        value: "Motor",
+        validaciones: { required: "campo requerido" },
+        placeholder: "",
+    },
+    {
+        tipo: "number",
+        value: "Cilindrada",
+        validaciones: { valueAsNumber: true },
+        placeholder: "1234",
+    },
+    {
+        tipo: "text",
+        value: "Potencia máxima",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Velocidad máxima",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Alimentación",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Encendido",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Arranque",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Transmisión",
+        validaciones: {},
+        placeholder: "",
+    },
+    {
+        tipo: "text",
+        value: "Tracción",
+        validaciones: {},
+        placeholder: "",
+    },
+];

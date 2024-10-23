@@ -58,6 +58,8 @@ export class MarcaController {
         await fs.unlink(`imgs/basics/${marca.img}`); //chequear que borre bien
         //borrado moto
         const moto = await Moto.find({ marca: marca._id });
+        console.log(moto);
+
         if (moto.length > 0) {
             for (let i = 0; i < moto.length; i++) {
                 await Review.deleteMany({ moto: moto[i]._id }); //borra todo los reviews

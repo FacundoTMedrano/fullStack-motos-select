@@ -28,46 +28,57 @@ export default function ChangePassword() {
     });
 
     return (
-        <form
-            onSubmit={handleSubmit(change.mutate)}
-            style={{ display: "flex", flexDirection: "column" }}
-        >
-            <label>
-                old password
-                <input
-                    type="password"
-                    autoComplete="false"
-                    {...register("oldPassword")}
-                />
-                {errors?.oldPassword?.message && (
-                    <p>{errors.oldPassword.message}</p>
-                )}
-            </label>
-            <label>
-                new password
-                <input
-                    type="password"
-                    autoComplete="false"
-                    {...register("newPassword")}
-                />
-                {errors?.newPassword?.message && (
-                    <p>{errors.newPassword.message}</p>
-                )}
-            </label>
-            <label>
-                repeat new password
-                <input
-                    type="password"
-                    autoComplete="false"
-                    {...register("repetNewPassword")}
-                />
-                {errors?.repetNewPassword?.message && (
-                    <p>{errors.repetNewPassword.message}</p>
-                )}
-            </label>
-            {change.isError && <p>error en los datos</p>}
-            {change.isSuccess && <p>exito al cambiar la contraseña</p>}
-            <button disabled={change.isPending || change.isSuccess}>submit</button>
-        </form>
+        <div className="change-password-page">
+            <div className="contenedor">
+                <h1>Cambiar Contraseña</h1>
+                <form
+                    onSubmit={handleSubmit(change.mutate)}
+                    style={{ display: "flex", flexDirection: "column" }}
+                >
+                    <div>
+                        <label htmlFor="old-password">Contraseña actual</label>
+                        <input
+                            id="old-password"
+                            type="password"
+                            {...register("oldPassword")}
+                        />
+                        {errors?.oldPassword?.message && (
+                            <p>{errors.oldPassword.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label htmlFor="password">Nueva contraseña</label>
+                        <input
+                            id="password"
+                            type="password"
+                            {...register("newPassword")}
+                        />
+                        {errors?.newPassword?.message && (
+                            <p>{errors.newPassword.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label htmlFor="new-password">
+                            Repetir nueva contraseña
+                        </label>
+                        <input
+                            id="new-password"
+                            type="password"
+                            {...register("repetNewPassword")}
+                        />
+                        {errors?.repetNewPassword?.message && (
+                            <p>{errors.repetNewPassword.message}</p>
+                        )}
+                    </div>
+                    <div className="boton">
+                        <button disabled={change.isPending || change.isSuccess}>
+                            Aceptar
+                        </button>
+                    </div>
+                </form>
+                {change.isError && <p>error en los datos</p>}
+                {change.isSuccess && <p>exito al cambiar la contraseña</p>}
+            </div>
+        </div>
     );
 }

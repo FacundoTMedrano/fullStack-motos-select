@@ -54,34 +54,49 @@ export default function Login() {
             console.log("success, loageado");
             setAuth(data);
             reset();
+            navigate("/")
         },
         onError: (error) => {
             //dependiendo el error podria ser que sea las credenciales malas
             console.log(error.message, error.response.data.msg);
         },
     });
-    
+
     return (
-        <div>
-            {logIn.isError && <p>error</p>}
-            {logIn.isPending && <p>loading...</p>}
-            <form onSubmit={handleSubmit(logIn.mutate)}>
-                <input
-                    placeholder="email"
-                    type="email"
-                    required
-                    {...register("email")}
-                />
-                {errors.email?.message && <p>{errors.email?.message}</p>}
-                <input
-                    required
-                    placeholder="password"
-                    type="password"
-                    {...register("password")}
-                />
-                {errors.password?.message && <p>{errors.password?.message}</p>}
-                <button>enviar</button>
-            </form>
+        <div className="login-page">
+            <div className="contenedor">
+                <h1>Iniciar sesion</h1>
+                <form onSubmit={handleSubmit(logIn.mutate)}>
+                    <div>
+                        <label htmlFor="email">Correo Electronico</label>
+                        <input
+                            placeholder="nombre@gmail.com"
+                            type="email"
+                            required
+                            {...register("email")}
+                        />
+                        {errors.email?.message && (
+                            <p>{errors.email?.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label htmlFor="password">Contraseña</label>
+                        <input
+                            id="password"
+                            required
+                            placeholder="password"
+                            type="password"
+                            {...register("password")}
+                        />
+                        {errors.password?.message && (
+                            <p>{errors.password?.message}</p>
+                        )}
+                    </div>
+                    <button>ingresar</button>
+                </form>
+                {logIn.isError && <p>error</p>}
+                {logIn.isPending && <p>loading...</p>}
+            </div>
         </div>
     );
 }

@@ -5,7 +5,8 @@ export default function filterObj(obj) {
                 v[1] !== undefined &&
                 v[1] !== null &&
                 v[1] !== "" &&
-                !(Array.isArray(v[1]) && v[1].length === 0)
+                !(Array.isArray(v[1]) && v[1].length === 0) &&
+                !Number.isNaN(v[1])
         )
     );
 }

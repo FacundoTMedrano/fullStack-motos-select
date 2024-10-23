@@ -2,10 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import PropTypes from "prop-types";
+import { useId } from "react";
 
 export default function TipoEditForm({ tipo: { estilo, _id }, setEditarId }) {
     const axiosPrivate = useAxiosPrivate();
     const queryClient = useQueryClient();
+    const idHook = useId();
 
     const {
         handleSubmit,
@@ -27,18 +29,28 @@ export default function TipoEditForm({ tipo: { estilo, _id }, setEditarId }) {
     });
 
     return (
-        <form onSubmit={handleSubmit(actualizar.mutate)}>
-            <input
-                type="text"
-                {...register("estilo", {
-                    required: "debe llenar el campo",
-                    maxLength: "maximo debe ser 20",
-                })}
-            />
-            {errors?.estilo && <p>{errors.estilo.message}</p>}
-            <button onClick={() => setEditarId("")}>cancelar</button>
-            <button disabled={actualizar.isPending}>actualizar</button>
-        </form>
+        <div className="casilla-form">
+            <form onSubmit={handleSubmit(actualizar.mutate)}>
+                <div className="valores-input">
+                    <label htmlFor={idHook}>Tipo:</label>
+                    <input
+                        id={idHook}
+                        type="text"
+                        {...register("estilo", {
+                            required: "debe llenar el campo",
+                            maxLength: "maximo debe ser 20",
+                        })}
+                    />
+                    {errors?.estilo && <p>{errors.estilo.message}</p>}
+                </div>
+                <div className="botones">
+                    <button onClick={() => setEditarId("")}>cancelar</button>
+                    <button type="submit" disabled={actualizar.isPending}>
+                        actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
     );
 }
 

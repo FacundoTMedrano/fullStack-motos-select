@@ -1,0 +1,146 @@
+@use "variables";
+//Dashboard.jsx
+
+.headerDashboard {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+    nav {
+        display: flex;
+        align-items: center;
+        margin: auto;
+        justify-content: space-evenly;
+
+        @media (min-width: variables.$breakpoint-tablet) {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            display: block;
+
+            @media (min-width: variables.$breakpoint-tablet) {
+                width: 25%;
+                display: flex;
+                justify-content: center;
+            }
+
+            img {
+                width: 100%;
+                max-width: 100px;
+                min-width: 50px;
+            }
+        }
+
+        .headerdashSelect {
+            display: flex;
+
+            @media (min-width: variables.$breakpoint-tablet) {
+                width: 50%;
+            }
+
+            select {
+                width: 50%;
+                font-family: variables.$fuente-secundaria;
+
+                @media (min-width: variables.$breakpoint-tablet) {
+                    width: 100%;
+
+                    &:nth-child(1) {
+                        margin-right: 2px;
+                    }
+
+                    &:nth-child(2) {
+                        margin-left: 2px;
+                    }
+                }
+            }
+        }
+
+        .hamburgerMenu {
+            position: relative;
+            display: block;
+
+            @media (min-width: variables.$breakpoint-tablet) {
+                width: 25%;
+            }
+
+            .nav-burger {
+                display: none;
+
+                @media (min-width: variables.$breakpoint-tablet) {
+                    display: flex;
+                    justify-content: center;
+                    gap: 15px;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    font-family: variables.$fuente-secundaria;
+
+                    @media (min-width: variables.$breakpoint-tablet) {
+                        font-size: 1.3rem;
+                        // margin: 0 0.5rem;
+                    }
+                }
+            }
+
+            .hamburger-icon {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 35px;
+                padding: 5px;
+                // border: 1px solid red;
+
+                @media (min-width: variables.$breakpoint-tablet) {
+                    display: none;
+                }
+
+                .line {
+                    border-radius: 35%;
+                    width: 25px;
+                    height: 4px;
+                    background-color: black;
+                    margin: 2.2px;
+                    transition: transform 0.3s ease, opacity 0.3s ease;
+                }
+
+                &.--open {
+                    .line:nth-child(1) {
+                        transform: translateY(8.8px) rotate(45deg);
+                    }
+                    .line:nth-child(2) {
+                        opacity: 0;
+                    }
+                    .line:nth-child(3) {
+                        transform: translateY(-8.8px) rotate(-45deg);
+                    }
+
+                    ~ .nav-burger {
+                        //es decir el sibling que seria nav-burger
+                        display: flex;
+                        flex-direction: column;
+                        background-color: rgb(68, 68, 170);
+                        position: absolute;
+                        right: 0;
+                        // border: 1px solid red;
+
+                        a {
+                            color: white;
+                            font-size: 1.2rem;
+                            margin: 5px;
+                            transition: 0.3s;
+                            display: block;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

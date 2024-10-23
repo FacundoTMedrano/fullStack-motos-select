@@ -52,21 +52,27 @@ export default function MotosPorEstilo() {
     }
 
     return (
-        <div>
-            {motosPorEstilo.map((v) => {
-                const imgBig = `${base}/imgs/big/${v.img}`;
-                const imgMedium = `${base}/imgs/medium/${v.img}`;
-                return (
-                    <Link key={v._id} to={`/ficha_tecnica/${v.nombre}`}>
-                        <img
-                            src={imgBig}
-                            srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
-                            style={{ width: "250px" }}
-                        />
-                        <h2>{v.nombre}</h2>
-                    </Link>
-                );
-            })}
+        <div className="motosPorEstilo">
+            <h1>Motos por Estilo</h1>
+            <ul>
+                {motosPorEstilo.map((v) => {
+                    const imgBig = `${base}/imgs/big/${v.img}`;
+                    const imgMedium = `${base}/imgs/medium/${v.img}`;
+                    const nombre = v.nombre.replace(" ", "_");
+
+                    return (
+                        <li key={v._id}>
+                            <Link to={`/ficha_tecnica/${nombre}`}>
+                                <img
+                                    src={imgBig}
+                                    srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                                />
+                                <h2>{v.nombre}</h2>
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
         </div>
     );
 }

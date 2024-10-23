@@ -1,0 +1,104 @@
+@use "variables" as v;
+@use "mixin" as m;
+@use "_imagen-box-extend";
+// MarcasCrud.jsx, CrearMarca.jsx y EditarMarca.jsx
+
+//tambien funciono para EditarMarca.jsx, usa las mismas clases
+.contenedor-form {
+    padding: 10px;
+
+    h1 {
+        text-align: center;
+        font-family: v.$fuente-primaria;
+        color: v.$color-azul-font;
+    }
+
+    form {
+        @include m.casilla;
+        
+        .imagen-box {
+            @extend %imagen-box;
+        }
+
+        .casilla-input {
+            display: flex;
+            flex-direction: column;
+            label {
+                font-family: v.$fuente-primaria;
+                margin-bottom: 0.2rem;
+            }
+            input {
+                font-family: v.$fuente-secundaria;
+            }
+            p {
+                font-family: v.$fuente-secundaria;
+                color: red;
+                margin-top: 0.5rem;
+                margin-bottom: 0;
+            }
+        }
+
+        .boton-crear {
+            button {
+                @include m.boton;
+                padding: 0.3rem 0.7rem;
+                margin: auto;
+                font-family: v.$fuente-secundaria;
+                padding-bottom: 0.4rem;
+                margin-top: 0.7rem;
+            }
+        }
+    }
+}
+
+.marcas-crud-page {
+    h1 {
+        font-family: v.$fuente-primaria;
+        text-align: center;
+        color: v.$color-azul-font;
+    }
+
+    > button {
+        @include m.boton;
+        margin: auto;
+    }
+
+    .contenedor-grid {
+        padding: 0 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        max-width: 1200px;
+        margin: auto;
+        margin-top: 35px;
+
+        @media (min-width: v.$breakpoint-tablet) {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        .casilla-val {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(128, 128, 128, 0.144);
+            font-family: v.$fuente-secundaria;
+
+            img {
+                display: block;
+                width: 100%;
+                margin: auto;
+            }
+
+            .botones {
+                display: flex;
+                justify-content: center;
+                gap: 7px;
+                margin-bottom: 20px;
+
+                button {
+                    @include m.boton;
+                    padding: 5px 10px;
+                }
+            }
+        }
+    }
+}

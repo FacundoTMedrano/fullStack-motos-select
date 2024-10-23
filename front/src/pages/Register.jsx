@@ -26,9 +26,7 @@ export default function Register() {
 
     const registerMut = useMutation({
         mutationFn: async (datos) => {
-            const { data } = await axios.post(`${base}/auth/register`, datos, {
-                withCredentials: true,
-            });
+            const { data } = await axios.post(`${base}/auth/register`, datos);
             console.log(data);
         },
         onSuccess: () => {
@@ -36,39 +34,55 @@ export default function Register() {
         },
         onError: (error) => {
             //dependiendo el error podria ser que sea las credenciales malas
-            console.log(error.message, error.response.data.msg);
+            console.log(error.message);
         },
     });
 
     return (
-        <div>
-            {registerMut.error && <p>error</p>}
-            {registerMut.isPending && <p>loading...</p>}
-            {registerMut.isSuccess && <p>cuenta creada</p>}
-            <form onSubmit={handleSubmit(registerMut.mutate)}>
-                <input
-                    placeholder="name"
-                    type="text"
-                    required
-                    {...register("name")}
-                />
-                {errors.name?.message && <p>{errors.name?.message}</p>}
-                <input
-                    placeholder="email"
-                    type="email"
-                    required
-                    {...register("email")}
-                />
-                {errors.email?.message && <p>{errors.email?.message}</p>}
-                <input
-                    required
-                    placeholder="password"
-                    type="password"
-                    {...register("password")}
-                />
-                {errors.password?.message && <p>{errors.password?.message}</p>}
-                <button disabled={registerMut.isSuccess}>enviar</button>
-            </form>
+        <div className="register-page">
+            <div className="contenedor">
+                <h1>Registro</h1>
+                <form onSubmit={handleSubmit(registerMut.mutate)}>
+                    <div>
+                        <label htmlFor="name">nombre</label>
+                        <input
+                            placeholder="name"
+                            type="text"
+                            required
+                            {...register("name")}
+                        />
+                        {errors.name?.message && <p>{errors.name?.message}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="email">Correo Electronico</label>
+                        <input
+                            placeholder="email"
+                            type="email"
+                            required
+                            {...register("email")}
+                        />
+                        {errors.email?.message && (
+                            <p>{errors.email?.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label htmlFor="password">Contraseña</label>
+                        <input
+                            required
+                            placeholder="password"
+                            type="password"
+                            {...register("password")}
+                        />
+                        {errors.password?.message && (
+                            <p>{errors.password?.message}</p>
+                        )}
+                    </div>
+                    <button disabled={registerMut.isSuccess}>enviar</button>
+                </form>
+                {registerMut.error && <p>error</p>}
+                {registerMut.isPending && <p>loading...</p>}
+                {registerMut.isSuccess && <p>cuenta creada</p>}
+            </div>
         </div>
     );
 }

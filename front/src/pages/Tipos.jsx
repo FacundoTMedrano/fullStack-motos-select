@@ -62,42 +62,59 @@ export default function Tipos() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(crear.mutate)}>
-                <input
-                    type="text"
-                    placeholder="estilo"
-                    {...register("estilo", {
-                        required: "debe llenar el campo",
-                        maxLength: "maximo debe ser 20",
-                    })}
-                />
-                {errors?.estilo && <p>{errors.estilo.message}</p>}
-                <button type="submit">crear</button>
-            </form>
-            {tipos.data.map((v) => {
-                if (v._id === editarId) {
-                    return (
-                        <TipoEditForm
-                            key={v._id}
-                            tipo={v}
-                            setEditarId={setEditarId}
-                        />
-                    );
-                } else {
-                    return (
-                        <div key={v._id}>
-                            <p>{v.estilo}</p>
-                            <button onClick={() => setEditarId(v._id)}>
-                                editar
-                            </button>
-                            <button onClick={() => eliminar.mutate(v._id)}>
-                                eliminar
-                            </button>
+        <div className="tipos-page">
+            <div className="form">
+                <div className="contenedor">
+                    <h1>Agrega un nuevo tipo de moto</h1>
+                    <form onSubmit={handleSubmit(crear.mutate)}>
+                        <div>
+                            <label htmlFor="tipo">Tipo de Moto</label>
+                            <input
+                                id="tipo"
+                                type="text"
+                                {...register("estilo", {
+                                    required: "debe llenar el campo",
+                                    maxLength: "maximo debe ser 20",
+                                })}
+                            />
+                            {errors?.estilo && <p>{errors.estilo.message}</p>}
                         </div>
-                    );
-                }
-            })}
+                        <button type="submit">crear</button>
+                    </form>
+                </div>
+            </div>
+            <div className="casillas">
+                {tipos.data.map((v) => {
+                    if (v._id === editarId) {
+                        return (
+                            <TipoEditForm
+                                key={v._id}
+                                tipo={v}
+                                setEditarId={setEditarId}
+                            />
+                        );
+                    } else {
+                        return (
+                            <div key={v._id} className="casilla-dato">
+                                <div className="valor">
+                                    <p>Tipo:</p>
+                                    <p>{v.estilo}</p>
+                                </div>
+                                <div className="botones">
+                                    <button onClick={() => setEditarId(v._id)}>
+                                        editar
+                                    </button>
+                                    <button
+                                        onClick={() => eliminar.mutate(v._id)}
+                                    >
+                                        eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    }
+                })}
+            </div>
         </div>
     );
 }

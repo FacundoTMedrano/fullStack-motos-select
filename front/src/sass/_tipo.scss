@@ -1,0 +1,82 @@
+@use "variables" as v;
+@use "mixin" as m;
+@use "extend-contenedor-input-label";
+// Tipos.jsx
+
+.tipos-page {
+    .form {
+        @extend %extender-contenedor;
+
+        .contenedor {
+            form {
+                button {
+                    @include m.boton;
+                }
+            }
+        }
+    }
+    .casillas {
+        padding: 10px;
+        font-family: v.$fuente-secundaria;
+
+        .casilla-form {
+            @include m.casilla;
+
+            form {
+                .valores-input {
+                    display: flex;
+                    align-items: center;
+
+                    label {
+                        width: 30%;
+                        text-align: right;
+                        padding-right: 5px;
+                        color: v.$color-azul-font;
+                        font-weight: 700;
+                    }
+                }
+                .botones {
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+
+                    button {
+                        @include m.boton;
+                        padding: 6px 12px;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+
+        .casilla-dato {
+            @include m.casilla;
+
+            .valor {
+                display: flex;
+                align-items: center;
+
+                p {
+                    &:nth-child(1) {
+                        width: 30%;
+                        text-align: right;
+                        padding-right: 5px;
+                        color: v.$color-azul-font;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            .botones {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+
+                button {
+                    @include m.boton;
+                    padding: 7px 20px;
+                }
+            }
+        }
+    }
+}

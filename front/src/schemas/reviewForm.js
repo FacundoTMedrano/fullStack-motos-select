@@ -11,6 +11,12 @@ export default z.object({
     frenos: z.number().min(0).max(10),
     luces: z.number().min(0).max(10),
     costoDeMantenimiento: z.number().min(0).max(10),
-    opinionPositiva: z.string().max(500).min(1,"debe de tener una opinion"),
-    opinionNegativa: z.string().max(500),
+    opinionPositiva: z
+        .string()
+        .max(500)
+        .min(1, "debe de tener una opinion positiva"),
+    opinionNegativa: z
+        .string()
+        .max(500)
+        .min(1, "debe tener una opinion negativa"),
 });

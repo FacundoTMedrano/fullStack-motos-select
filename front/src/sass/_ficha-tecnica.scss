@@ -1,0 +1,306 @@
+@use "variables";
+//fichaTecnicaPage.jsx
+
+%tabla-extendido {
+    padding: 10px;
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 1rem;
+        max-width: 40rem;
+        margin: auto;
+
+        caption {
+            font-family: variables.$fuente-secundaria;
+            color: variables.$color-azul-font;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 0.7rem;
+        }
+
+        tbody {
+            tr {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                border: 1px solid black;
+
+                &:nth-child(odd) {
+                    background-color: rgba(236, 237, 241, 0.616);
+                }
+                &:nth-child(even) {
+                    background-color: rgba(219, 219, 219, 0.075);
+                }
+
+                @media (min-width: variables.$breakpoint-tablet) {
+                    flex-direction: row;
+                }
+
+                th {
+                    text-align: left;
+                    font-family: variables.$fuente-secundaria;
+
+                    @media (min-width: variables.$breakpoint-tablet) {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        width: 30%;
+                        text-align: right;
+                        padding-right: 0.9rem;
+                    }
+                }
+                td {
+                    font-family: variables.$fuente-secundaria;
+
+                    @media (min-width: variables.$breakpoint-tablet) {
+                        width: 70%;
+                        margin: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+%box-dato-extend {
+    border: 1px solid rgba(128, 128, 128, 0.637);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.096);
+    max-width: 30rem;
+    border-radius: 15px;
+    margin: 1.5rem auto 0.5rem auto;
+    text-align: center;
+}
+
+.fichaTecnicaComponent {
+    h1 {
+        width: fit-content;
+        margin: 25px auto;
+        font-family: variables.$fuente-primaria;
+        color: variables.$color-azul-font;
+        font-size: 1.8rem;
+
+        @media (min-width: variables.$breakpoint-tablet) {
+            font-size: 2.2rem;
+        }
+    }
+
+    .sliderFicha {
+        width: 80vw;
+        margin: auto;
+
+        img {
+            width: 100%;
+            max-width: 700px;
+            display: block;
+            margin: auto;
+        }
+    }
+
+    .fichaPageTablas {
+        @extend %tabla-extendido;
+    }
+}
+
+.ficha-reviewsComponent {
+    .logesee-para-dejar-un-link {
+        padding: 0 1rem;
+        > div {
+            @extend %box-dato-extend;
+            padding-bottom: 1rem;
+
+            a{
+                text-decoration: none;
+
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .ficha-reviewsComponent--sin-reviews {
+        padding: 0 1rem;
+
+        > div {
+            @extend %box-dato-extend;
+
+            h3 {
+                padding: 1rem;
+                margin-top: 0;
+                margin-bottom: 0;
+                font-size: 1.8rem;
+                color: variables.$color-azul-font;
+                font-family: variables.$fuente-primaria;
+            }
+
+            p {
+                font-family: variables.$fuente-secundaria;
+                margin-top: 0;
+                padding: 0.5rem;
+            }
+        }
+    }
+
+    .avg-puntaje-comentarios {
+        .tabla-promedio-y-estrellas {
+            .tabla-promedio {
+                @extend %tabla-extendido;
+            }
+
+            .estrellas-y-promedio {
+                padding: 0 10px;
+                > div {
+                    @extend %box-dato-extend;
+
+                    p {
+                        font-family: variables.$fuente-secundaria;
+                    }
+
+                    .fichaPage-promedio-estrellas {
+                        color: variables.$color-celeste-font;
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+        .comentarios {
+            padding: 10px;
+
+            .comentario {
+                max-width: 40rem;
+                margin: auto;
+
+                h3 {
+                    padding-left: 13px;
+                    margin-bottom: 0.3rem;
+                    font-family: variables.$fuente-primaria;
+                }
+
+                .positivo-negativo {
+                    padding: 10px;
+                    border: 1px solid rgba(212, 212, 212, 0.603);
+                    border-radius: 10px;
+                    background-color: rgba(236, 237, 241, 0.39);
+
+                    div {
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            font-family: variables.$fuente-secundaria;
+                            font-size: 1rem;
+                            margin: 0.8rem 0;
+                        }
+
+                        .icon-thumb-up {
+                            color: green;
+                            margin: auto 0.4rem;
+                            font-size: 1.3rem;
+                        }
+                        .icon-thumb-down {
+                            color: red;
+                            margin: auto 0.4rem;
+                            font-size: 1.3rem;
+                        }
+                    }
+
+                    > p {
+                        font-family: variables.$fuente-secundaria;
+                        font-size: 1rem;
+                        margin: 0.8rem 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .component-reviews-Form {
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 35rem;
+            padding: 10px;
+            margin: auto;
+
+            .review-aspecto-a-favor,
+            .review-aspecto-en-contra {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5rem;
+                    font-family: variables.$fuente-primaria;
+
+                    .icon-thumb-up {
+                        color: green;
+                        display: block;
+                        position: relative;
+                        top: 1px;
+                        padding-right: 5px;
+                    }
+
+                    .icon-thumb-down {
+                        color: red;
+                        display: block;
+                        position: relative;
+                        top: 1px;
+                        padding-right: 5px;
+                    }
+                }
+
+                textarea {
+                    height: 5rem;
+                    font-family: variables.$fuente-secundaria;
+                }
+
+                p {
+                    color: red;
+                }
+            }
+
+            .review-calificaciones {
+                margin-top: 1rem;
+
+                h3 {
+                    text-align: center;
+                }
+
+                .form-range-review {
+                    border: 1px solid rgb(216, 216, 216);
+                    padding: 0.5rem;
+
+                    label {
+                        font-family: variables.$fuente-secundaria;
+                    }
+
+                    div {
+                        display: flex;
+
+                        input {
+                            width: 100%;
+                        }
+
+                        .reviews-form-puntaje {
+                            margin: 0.4rem;
+                            font-size: 1.3rem;
+                            font-family: variables.$fuente-secundaria;
+                        }
+                    }
+                }
+            }
+
+            .ficha-review-form-boton-enviar {
+                font-family: variables.$fuente-secundaria;
+                width: 35%;
+                margin: auto;
+                margin-top: 0.8rem;
+                border-radius: 10px;
+                padding: 0.4rem;
+                padding-bottom: 0.5rem;
+                border: 1px solid grey;
+            }
+        }
+    }
+}

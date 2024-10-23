@@ -3,6 +3,8 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useContexto from "../hooks/useContexto";
 import useAuth from "../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import espaciado from "../utils/espaciado";
 
 export default function LogoutButon() {
     const {
@@ -13,6 +15,8 @@ export default function LogoutButon() {
     const { setSelectCaract, setSelectMoto } = useContexto();
     const navi = useNavigate();
     const axios = useAxiosPrivate();
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const salirMut = useMutation({
         mutationFn: async () => {
@@ -39,19 +43,32 @@ export default function LogoutButon() {
         },
     });
 
-    if (!role) {
-        return (
-            <div>
-                <Link to={"register"}>register</Link>
-                <Link to={"login"}>login</Link>
+    return (
+        <div className="hamburgerMenu">
+            {/* Icono de hamburguesa */}
+            <div
+                className={`hamburger-icon ${isOpen ? "--open" : ""}`}
+                onClick={() => setIsOpen((prev) => !prev)}
+            >
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
             </div>
-        );
-    } else {
-        return (
-            <div>
-                <Link to={`/${role}`}>{role}</Link>
-                <Link onClick={salirMut.mutate}>salir</Link>
+
+            {/* Menú desplegable */}
+            <div className="nav-burger">
+                {!role ? (
+                    <>
+                        <Link to={"register"}>register</Link>
+                        <Link to={"login"}>login</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to={`/${role}`}>{espaciado(role)}</Link>
+                        <Link onClick={salirMut.mutate}>Salir</Link>
+                    </>
+                )}
             </div>
-        );
-    }
+        </div>
+    );
 }

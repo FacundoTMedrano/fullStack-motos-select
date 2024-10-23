@@ -1,0 +1,102 @@
+@use "variables" as v;
+@use "extend-contenedor-input-label";
+@use "mixin" as m;
+// Cilindradas.jsx
+
+.crear-cilindrada-page {
+    .form-crear-cilindrada {
+        @extend %extender-contenedor;
+
+        .contenedor {
+            form {
+                button {
+                    @include m.boton;
+                }
+            }
+        }
+    }
+    .ver-editar-cilindradas {
+        padding: 10px;
+
+        .formulario {
+            @include m.casilla;
+            border-radius: 5px;
+
+            form {
+                .input-box {
+                    // border: 1px solid red;
+                    display: flex;
+                    align-items: center;
+                    margin: 1rem auto;
+
+                    label {
+                        width: 30%;
+                        text-align: right;
+                        padding-right: 0.4rem;
+                        font-family: v.$fuente-secundaria;
+                        color: v.$color-azul-font;
+                        font-weight: 700;
+                    }
+
+                    input {
+                        font-family: v.$fuente-secundaria;
+                        width: 70%;
+                    }
+                }
+
+                .botones {
+                    margin-top: 10px;
+                    display: flex;
+                    justify-content: center;
+                    gap: 15px;
+
+                    button {
+                        @include m.boton;
+                        font-family: v.$fuente-secundaria;
+                        margin-top: 0.2rem;
+                    }
+                }
+            }
+        }
+
+        .casilla {
+            @include m.casilla;
+            border-radius: 5px;
+
+            .valores {
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin-top: 0.4rem;
+                    margin-bottom: 0.4rem;
+
+                    &:nth-child(1) {
+                        width: 30%;
+                        text-align: right;
+                        padding-right: 0.4rem;
+                        font-family: v.$fuente-secundaria;
+                        color: v.$color-azul-font;
+                        font-weight: 700;
+                    }
+
+                    &:nth-child(2) {
+                        font-family: v.$fuente-secundaria;
+                    }
+                }
+            }
+            
+            .botones {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+
+                button {
+                    @include m.boton;
+                    font-family: v.$fuente-secundaria;
+                    margin-top: 0.2rem;
+                }
+            }
+        }
+    }
+}

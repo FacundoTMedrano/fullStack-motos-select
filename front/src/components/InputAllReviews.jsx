@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
@@ -8,6 +8,10 @@ export default function InputAllReviews({ valor, id }) {
     const queryClient = useQueryClient();
 
     const [val, setVal] = useState(valor);
+
+    useEffect(() => {
+        setVal(valor);
+    }, [valor]);
 
     const actualizar = useMutation({
         mutationFn: async (data) => {
@@ -20,7 +24,7 @@ export default function InputAllReviews({ valor, id }) {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["reviews", "all"] });
-            console.log("realizado")
+            console.log("realizado");
         },
     });
 
