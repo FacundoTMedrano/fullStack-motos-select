@@ -75,8 +75,21 @@
   }
 }
 .headerDashboard nav .headerdashSelect select {
+  cursor: pointer;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
   width: 50%;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.headerDashboard nav .headerdashSelect select:hover {
+  background-color: rgba(0, 0, 0, 0.76);
 }
 @media (min-width: 768px) {
   .headerDashboard nav .headerdashSelect select {
@@ -309,7 +322,7 @@
   }
 }
 .fichaTecnicaComponent .sliderFicha {
-  width: 80vw;
+  max-width: 700px;
   margin: auto;
 }
 .fichaTecnicaComponent .sliderFicha img {
@@ -447,6 +460,7 @@
 }
 .ficha-reviewsComponent .component-reviews-Form form .review-calificaciones h3 {
   text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .ficha-reviewsComponent .component-reviews-Form form .review-calificaciones .form-range-review {
   border: 1px solid rgb(216, 216, 216);
@@ -467,14 +481,18 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .ficha-reviewsComponent .component-reviews-Form form .ficha-review-form-boton-enviar {
+  cursor: pointer;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  width: 35%;
-  margin: auto;
-  margin-top: 0.8rem;
-  border-radius: 10px;
-  padding: 0.4rem;
-  padding-bottom: 0.5rem;
-  border: 1px solid grey;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.ficha-reviewsComponent .component-reviews-Form form .ficha-review-form-boton-enviar:hover {
+  background-color: rgba(0, 0, 0, 0.76);
 }
 
 .login-page,
@@ -597,13 +615,13 @@
 }
 
 .change-password-page .contenedor form .boton button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .change-password-page .contenedor form .boton button:hover {
@@ -611,13 +629,13 @@
 }
 
 .crear-cilindrada-page .form-crear-cilindrada .contenedor form button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .crear-cilindrada-page .form-crear-cilindrada .contenedor form button:hover {
@@ -659,13 +677,13 @@
   gap: 15px;
 }
 .crear-cilindrada-page .ver-editar-cilindradas .formulario form .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-top: 0.2rem;
@@ -707,13 +725,13 @@
   gap: 15px;
 }
 .crear-cilindrada-page .ver-editar-cilindradas .casilla .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin-top: 0.2rem;
@@ -723,13 +741,13 @@
 }
 
 .tipos-page .form .contenedor form button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .tipos-page .form .contenedor form button:hover {
@@ -764,13 +782,13 @@
   gap: 10px;
 }
 .tipos-page .casillas .casilla-form form .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 6px 12px;
   margin-top: 10px;
@@ -803,13 +821,13 @@
   gap: 10px;
 }
 .tipos-page .casillas .casilla-dato .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 7px 20px;
 }
@@ -861,13 +879,13 @@
   gap: 15px;
 }
 .signed-review-page .casillas .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 8px 16px;
@@ -941,13 +959,13 @@
   margin-top: 20px;
 }
 .signed-review-edit-single .contenedor form .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 7px 14px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -993,13 +1011,13 @@
   margin: 0.8rem auto 1rem auto;
 }
 .crear-moto-form-page form .moto-box .imagen-box .botones button, .contenedor-form form .imagen-box .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 0.3rem 0.7rem;
 }
@@ -1041,13 +1059,13 @@
   margin-bottom: 0;
 }
 .contenedor-form form .boton-crear button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 0.3rem 0.7rem;
   margin: auto;
@@ -1065,13 +1083,13 @@
   color: rgb(17, 26, 139);
 }
 .marcas-crud-page > button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: auto;
 }
@@ -1110,13 +1128,13 @@
   margin-bottom: 20px;
 }
 .marcas-crud-page .contenedor-grid .casilla-val .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 5px 10px;
 }
@@ -1137,13 +1155,13 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .ver-y-editar-motos-page .crear-select button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 7px 14px;
 }
@@ -1151,13 +1169,13 @@
   background-color: rgba(0, 0, 0, 0.76);
 }
 .ver-y-editar-motos-page .crear-select select {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 7px 14px;
 }
@@ -1209,13 +1227,13 @@
   margin-bottom: 20px;
 }
 .ver-y-editar-motos-page .contenedor .casilla .botones button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 5px 10px;
 }
@@ -1325,13 +1343,13 @@
   display: none;
 }
 .crear-moto-form-page form .imagenes-de-ficha .componente-muchas-imgs button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: auto;
   margin-top: 15px;
@@ -1364,13 +1382,13 @@
 }
 .crear-moto-form-page form .select-div div select {
   width: 100%;
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   padding: 0.6rem 1.5rem;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -1440,19 +1458,361 @@
   }
 }
 .crear-moto-form-page form .boton button {
+  cursor: pointer;
   display: block;
   background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  cursor: pointer;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: auto;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .crear-moto-form-page form .boton button:hover {
   background-color: rgba(0, 0, 0, 0.76);
+}
+
+.All-reviews-page h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  text-align: center;
+}
+.All-reviews-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 30rem;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .All-reviews-page form {
+    flex-direction: row;
+    justify-content: center;
+    max-width: 45rem;
+  }
+}
+.All-reviews-page form div {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .All-reviews-page form div {
+    width: 33%;
+  }
+}
+.All-reviews-page form div label {
+  padding-left: 1rem;
+}
+.All-reviews-page form div select {
+  cursor: pointer;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  width: 100%;
+  margin-top: 0.3rem;
+}
+.All-reviews-page form div select:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.All-reviews-page .contenedor ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  max-width: 1400px;
+  margin: auto;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .All-reviews-page .contenedor ul {
+    padding: 0 20px;
+  }
+}
+.All-reviews-page .contenedor ul li {
+  list-style: none;
+  border: 1px solid rgba(128, 128, 128, 0.349);
+}
+.All-reviews-page .contenedor ul li p {
+  margin: 0.5rem;
+}
+.All-reviews-page .contenedor ul li .info {
+  display: flex;
+  align-items: center;
+}
+.All-reviews-page .contenedor ul li .info p {
+  margin-left: 0rem;
+}
+.All-reviews-page .contenedor ul li .info span {
+  margin-right: 0.4rem;
+}
+.All-reviews-page .contenedor ul li .info p:nth-child(1) {
+  text-align: right;
+  width: 30%;
+  margin-right: 0;
+}
+.All-reviews-page .contenedor ul li .link {
+  display: flex;
+  align-items: center;
+}
+.All-reviews-page .contenedor ul li .link span {
+  margin-right: 0.4rem;
+}
+.All-reviews-page .contenedor ul li .link a {
+  display: block;
+  text-align: left;
+}
+.All-reviews-page .contenedor ul li .link p {
+  text-align: right;
+  margin-left: 0;
+  width: 30%;
+  margin-right: 0;
+}
+.All-reviews-page .contenedor ul li .boton button {
+  cursor: pointer;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: auto;
+}
+.All-reviews-page .contenedor ul li .boton button:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+.All-reviews-page .contenedor .sin-reviews h2 {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(92, 100, 204);
+}
+
+.see-one-review-admin {
+  padding: 20px;
+}
+.see-one-review-admin h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  text-align: center;
+}
+.see-one-review-admin table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+  max-width: 40rem;
+  margin: auto;
+}
+.see-one-review-admin table caption {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(17, 26, 139);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0.7rem;
+}
+.see-one-review-admin table tbody tr {
+  display: flex;
+  flex-direction: column;
+  padding: 0.1rem;
+  border: 1px solid black;
+}
+.see-one-review-admin table tbody tr:nth-child(odd) {
+  background-color: rgba(236, 237, 241, 0.616);
+}
+.see-one-review-admin table tbody tr:nth-child(even) {
+  background-color: rgba(219, 219, 219, 0.075);
+}
+@media (min-width: 768px) {
+  .see-one-review-admin table tbody tr {
+    flex-direction: row;
+  }
+}
+.see-one-review-admin table tbody tr th {
+  text-align: left;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .see-one-review-admin table tbody tr th {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+    text-align: right;
+    padding-right: 0.9rem;
+  }
+}
+.see-one-review-admin table tbody tr td {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+@media (min-width: 768px) {
+  .see-one-review-admin table tbody tr td {
+    width: 70%;
+    margin: auto;
+  }
+}
+.see-one-review-admin .botones {
+  display: flex;
+  justify-content: center;
+}
+.see-one-review-admin .botones .cambio-estado {
+  display: flex;
+}
+.see-one-review-admin .botones button,
+.see-one-review-admin .botones select {
+  cursor: pointer;
+  display: block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0.5rem;
+}
+.see-one-review-admin .botones button:hover,
+.see-one-review-admin .botones select:hover {
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.see-users-page,
+.reviews-de-usuario-id {
+  padding: 10px;
+}
+.see-users-page h1,
+.reviews-de-usuario-id h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(17, 26, 139);
+  text-align: center;
+}
+.see-users-page table,
+.reviews-de-usuario-id table {
+  border-collapse: collapse;
+  width: 70%;
+  margin-top: 1rem;
+  max-width: 1400px;
+  margin: auto;
+}
+.see-users-page table tbody tr,
+.reviews-de-usuario-id table tbody tr {
+  text-align: center;
+  border: 1px solid black;
+}
+.see-users-page table tbody tr:nth-child(odd),
+.reviews-de-usuario-id table tbody tr:nth-child(odd) {
+  background-color: rgba(236, 237, 241, 0.616);
+}
+.see-users-page table tbody tr:nth-child(even),
+.reviews-de-usuario-id table tbody tr:nth-child(even) {
+  background-color: rgba(219, 219, 219, 0.075);
+}
+.see-users-page table tbody tr th,
+.reviews-de-usuario-id table tbody tr th {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.see-users-page table tbody tr td,
+.reviews-de-usuario-id table tbody tr td {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.dashboard-logeado .dash {
+  display: flex;
+  justify-content: right;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash {
+    justify-content: center;
+  }
+}
+.dashboard-logeado .dash .burger {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 1rem;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .burger {
+    display: none;
+  }
+}
+.dashboard-logeado .dash .burger.close {
+  visibility: hidden;
+}
+.dashboard-logeado .dash .menu {
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 15rem;
+  background-color: rgba(0, 0, 0, 0.596);
+  transform: translateX(100%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 500ms ease;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .menu {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    max-width: 100%;
+    transform: translateX(0%);
+    display: flex;
+    justify-content: center;
+  }
+}
+.dashboard-logeado .dash .menu.open {
+  transform: translateX(0%);
+  visibility: visible;
+  opacity: 1;
+  transition: all 500ms ease;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .menu nav {
+    display: flex;
+  }
+}
+.dashboard-logeado .dash .menu nav a {
+  display: block;
+  text-decoration: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+  font-size: 1.7rem;
+  padding: 0.6rem;
+  transition: all 100ms ease;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .menu nav a {
+    font-size: 1rem;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+}
+.dashboard-logeado .dash .menu nav a:hover {
+  border-left: 5px solid white;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .menu nav a:hover {
+    border-left: none;
+    border-bottom: 5px solid white;
+  }
+}
+.dashboard-logeado .dash .menu .close {
+  cursor: pointer;
+  color: white;
+  font-size: 2.5rem;
+  margin: 1rem auto;
+  min-width: 15px;
+}
+@media (min-width: 768px) {
+  .dashboard-logeado .dash .menu .close {
+    display: none;
+  }
+}
+.dashboard-logeado .dash .menu .close:hover {
+  transform: scale(1.1);
 }
 
 /*# sourceMappingURL=index.css.map */

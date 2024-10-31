@@ -18,7 +18,11 @@ export default function Reviews({ moto }) {
         auth: { role },
     } = useAuth();
 
-    const { isLoading, isError, data } = useQuery({
+    const {
+        isLoading,
+        isError,
+        data = [],
+    } = useQuery({
         queryKey: ["reviews", moto._id],
         queryFn: async () => {
             const { data } = await axiosPublic(`reviews/moto/${moto._id}`);

@@ -31,9 +31,9 @@ import EditarMoto from "./pages/EditarMoto";
 import AllReviews from "./pages/AllReviews";
 import ReviewSeeOneAdmin from "./pages/ReviewSeeOneAdmin";
 import SeeUsers from "./pages/SeeUsers";
-import SeeReviesOfUsers from "./pages/SeeReviesOfUsers";
 import CrearMarca from "./pages/CrearMarca";
 import EditarMarca from "./pages/EditarMarca";
+import SeeReviewsOfUsers from "./pages/SeeReviewsOfUsers";
 
 export default function App() {
     const { setLoading } = useAuth();
@@ -120,7 +120,7 @@ export default function App() {
 
                         <Route path="ver-usuarios">
                             <Route index element={<SeeUsers />} />
-                            <Route path=":id" element={<SeeReviesOfUsers />} />
+                            <Route path=":id" element={<SeeReviewsOfUsers />} />
                         </Route>
                     </Route>
                 </Route>

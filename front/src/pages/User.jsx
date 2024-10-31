@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 export default function User() {
     return (
-        <div>
+        <div className="dashboard-logeado">
             <nav>
                 <NavLink to={"/"}>Inicio</NavLink>
                 <NavLink to={"/user"}>Datos</NavLink>

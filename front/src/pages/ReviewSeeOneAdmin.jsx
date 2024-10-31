@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import espaciado from "../utils/espaciado";
 
 export default function ReviewSeeOneAdmin() {
     const { id } = useParams();
@@ -69,36 +70,47 @@ export default function ReviewSeeOneAdmin() {
     }
 
     return (
-        <div>
+        <div className="see-one-review-admin">
+            <h1>Review</h1>
             <table>
                 <tbody>
                     {Object.entries(review.data).map(([key, value]) => {
                         return (
                             <tr key={key}>
-                                <th>{key}</th>
+                                <th>{espaciado(key)}</th>
                                 <td>{value}</td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
-            <button
-                disabled={eliminar.isPending}
-                onClick={() => eliminar.mutate(id)}
-            >
-                eliminar
-            </button>
-            <select value={val} onChange={(e) => setVal(e.target.value)}>
-                <option value="approved">approved</option>
-                <option value="disapproved">disapproved</option>
-                <option value="pending">pending</option>
-            </select>
-            <button
-                disabled={val === review.data.state || actualizar.isPending}
-                onClick={() => actualizar.mutate(val)}
-            >
-                cambiar state
-            </button>
+            <div className="botones">
+                <button
+                    disabled={eliminar.isPending}
+                    onClick={() => eliminar.mutate(id)}
+                >
+                    eliminar
+                </button>
+                <div className="cambio-estado">
+                    <select
+                        value={val}
+                        onChange={(e) => setVal(e.target.value)}
+                    >
+                        <option value="approved">approved</option>
+                        <option value="disapproved">disapproved</option>
+                        <option value="pending">pending</option>
+                    </select>
+
+                    {val !== review.data.state && (
+                        <button
+                            disabled={actualizar.isPending}
+                            onClick={() => actualizar.mutate(val)}
+                        >
+                            cambiar state
+                        </button>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

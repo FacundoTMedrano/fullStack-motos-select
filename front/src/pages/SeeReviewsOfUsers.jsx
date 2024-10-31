@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useParams } from "react-router-dom";
 
-export default function SeeReviesOfUsers() {
+export default function SeeReviewsOfUsers() {
     const axiosPrivate = useAxiosPrivate();
     const { id } = useParams();
 
@@ -25,7 +25,8 @@ export default function SeeReviesOfUsers() {
     }
 
     return (
-        <div>
+        <div className="reviews-de-usuario-id">
+            <h1>Usuario</h1>
             <table>
                 <thead>
                     <tr>
@@ -38,7 +39,6 @@ export default function SeeReviesOfUsers() {
                 </thead>
                 <tbody>
                     {reviews.data.map((v) => {
-                        console.log(v)
                         return (
                             <tr key={v._id}>
                                 <td>{v.opinionPositiva}</td>

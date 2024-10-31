@@ -1,4 +1,5 @@
 @use "variables";
+@use "mixin" as m;
 //Dashboard.jsx
 
 .headerDashboard {
@@ -39,8 +40,12 @@
             }
 
             select {
+                @include m.boton;
+                margin: .2rem;
+                padding: .5rem 1rem;
                 width: 50%;
                 font-family: variables.$fuente-secundaria;
+                // gap: .3rem;
 
                 @media (min-width: variables.$breakpoint-tablet) {
                     width: 100%;

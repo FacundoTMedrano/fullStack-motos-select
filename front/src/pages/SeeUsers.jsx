@@ -25,9 +25,10 @@ export default function SeeUsers() {
         return <div>error</div>;
     }
 
-    console.log(users.data, "ss");
+    
     return (
-        <div>
+        <div className="see-users-page">
+            <h1>Usuarios</h1>
             <table>
                 <thead>
                     <tr>

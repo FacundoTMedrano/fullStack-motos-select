@@ -1,0 +1,41 @@
+@use "variables" as v;
+@use "mixin" as m;
+@use "_imagen-box-extend";
+
+.see-users-page,
+.reviews-de-usuario-id {
+    padding: 10px;
+
+    h1 {
+        font-family: v.$fuente-primaria;
+        color: v.$color-azul-font;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin-top: 1rem;
+        max-width: 1400px;
+        margin: auto;
+
+        tbody {
+            tr {
+                text-align: center;
+                border: 1px solid black;
+                &:nth-child(odd) {
+                    background-color: rgba(236, 237, 241, 0.616);
+                }
+                &:nth-child(even) {
+                    background-color: rgba(219, 219, 219, 0.075);
+                }
+                th {
+                    font-family: v.$fuente-secundaria;
+                }
+                td {
+                    font-family: v.$fuente-secundaria;
+                }
+            }
+        }
+    }
+}

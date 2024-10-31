@@ -11,3 +11,6 @@
 @use "marcas-crud"; // MarcasCrud.jsx, CrearMarca.jsx y EditarMarca.jsx
 @use "motos"; // Motos.jsx
 @use "motos-crud"; // CrearMoto.jsx y EditarMoto.jsx
+@use "all-reviews"; // AllReviews.jsx ReviewSeeOneAdmin.jsx
+@use "see-users"; // SeeUsers.jsx
+@use "dashboard-logeado"; // Admin.jsx y User.jsx

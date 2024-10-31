@@ -7,7 +7,10 @@ import * as z from "zod";
 
 export class ReviewController {
     async getAll(req, res) {
-        const reviews = await Review.find();
+        const reviews = await Review.find().populate([
+            { path: "marca", select: "marca" },
+            { path: "moto", select: "nombre" },
+        ]);
         return res.status(StatusCodes.OK).json(reviews);
     }
 

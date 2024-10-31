@@ -1,0 +1,109 @@
+@use "variables" as v;
+@use "mixin" as m;
+
+.dashboard-logeado {
+    // padding: 0.5rem;
+
+    .dash {
+        display: flex;
+        justify-content: right;
+
+        @media (min-width: v.$breakpoint-tablet) {
+            justify-content: center;
+        }
+
+        .burger {
+            cursor: pointer;
+            font-size: 2rem;
+            margin: 1rem;
+
+            @media (min-width: v.$breakpoint-tablet) {
+                display: none;
+            }
+
+            &.close {
+                visibility: hidden;
+            }
+        }
+
+        .menu {
+            display: flex;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            max-width: 15rem;
+            background-color: rgba(0, 0, 0, 0.596);
+
+            transform: translateX(100%);
+            visibility: hidden;
+            opacity: 0;
+            transition: all 500ms ease;
+
+            @media (min-width: v.$breakpoint-tablet) {
+                position: static;
+                visibility: visible;
+                opacity: 1;
+                max-width: 100%;
+                transform: translateX(0%);
+                display: flex;
+                justify-content: center;
+            }
+
+            &.open {
+                transform: translateX(0%);
+                visibility: visible;
+                opacity: 1;
+                transition: all 500ms ease;
+            }
+
+            nav {
+                @media (min-width: v.$breakpoint-tablet) {
+                    display: flex;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    font-family: v.$fuente-primaria;
+                    color: white;
+                    font-size: 1.7rem;
+                    padding: 0.6rem;
+                    transition: all 100ms ease;
+
+                    @media (min-width: v.$breakpoint-tablet) {
+                        font-size: 1rem;
+                        border-top: 5px solid transparent;
+                        border-bottom: 5px solid transparent;
+                    }
+
+                    &:hover {
+                        border-left: 5px solid white;
+
+                        @media (min-width: v.$breakpoint-tablet) {
+                            border-left: none;
+                            border-bottom: 5px solid white;
+                        }
+                    }
+                }
+            }
+
+            .close {
+                cursor: pointer;
+                color: white;
+                font-size: 2.5rem;
+                margin: 1rem auto;
+                min-width: 15px;
+
+                @media (min-width: v.$breakpoint-tablet) {
+                    display: none;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}

@@ -270,6 +270,7 @@ export class AuthController {
             user.passwordToken,
             validacion.data.token,
         );
+
         if (!match) {
             throw new CustomErrors.BadRequestError(
                 "Please provide valid values",
