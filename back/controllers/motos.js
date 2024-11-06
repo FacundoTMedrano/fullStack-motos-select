@@ -67,7 +67,7 @@ export class MotoController {
             })
             .safeParse(datos.moto);
 
-        const ficha = fichaMecanConfigValidate({
+            const ficha = fichaMecanConfigValidate({
             mecanica: datos.mecanica,
             configuracion: datos.configuracion,
         });

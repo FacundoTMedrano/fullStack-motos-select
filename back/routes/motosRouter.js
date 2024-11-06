@@ -28,8 +28,6 @@ router.post(
     "/",
     verifyJWT,
     verifyRoles(["admin"]),
-    // upload.single("motoImg"),
-    // upload.array("fichaImgs"),
     upload.fields([{ name: "motoImg" }, { name: "fichaImgs" }]),
     moto.create,
 );
