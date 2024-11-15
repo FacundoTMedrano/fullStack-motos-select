@@ -55,9 +55,14 @@ export default function FichaTecnica({ moto }) {
             <div className="sliderFicha">
                 <Slider {...settings}>
                     {ficha.data.imagenes.map((v) => {
+                        const imgBig = `${base}/imgs/big/${v}`;
+                        const imgMedium = `${base}/imgs/medium/${v}`;
                         return (
                             <div key={v}>
-                                <img src={`${base}/imgs/big/${v}`} />
+                                <img
+                                    src={imgBig}
+                                    srcSet={`${imgMedium} 500w,${imgBig} 1000w`}
+                                />
                             </div>
                         );
                     })}
